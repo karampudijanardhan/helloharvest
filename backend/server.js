@@ -59,7 +59,7 @@ app.get("/api/test", (req, res) => {
 
 // 🔥 CORRECT PATH (this was the issue)
 const __dirname = path.resolve();
-const distPath = path.join(__dirname, "../frontend/dist");
+const distPath = path.join(__dirname, "../../frontend/dist");
 
 // serve static files
 app.use(express.static(distPath));
