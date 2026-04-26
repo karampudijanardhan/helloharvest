@@ -37,7 +37,7 @@ export const categories: Category[] = [
     description:
       "Flavorful spice powders like garlic, ginger, lemon, and jaggery for cooking and health benefits.",
     image:
-      "https://images.unsplash.com/photo-1603046891744-1f76eb10aec1?w=600&h=400&fit=crop",
+      "/garlic powder.png",
     productCount: 5,
   },
   {
@@ -57,7 +57,7 @@ export const categories: Category[] = [
     description:
       "Pure and natural honey varieties collected from trusted sources for better health and immunity.",
     image:
-      "https://images.unsplash.com/photo-1587049633312-d628ae50a8ae?w=600&h=400&fit=crop",
+      "/IMG-20260426-WA0029.jpg",
     productCount: 2,
   },
   {
@@ -67,7 +67,7 @@ export const categories: Category[] = [
     description:
       "Traditional homemade pickles including veg and non-veg varieties with authentic taste.",
     image:
-      "https://images.unsplash.com/photo-1604908176997-431c9cb73f58?w=600&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1582284540020-8acbe03f4924?w=400",
     productCount: 9,
   },
 ];
