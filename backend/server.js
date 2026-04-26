@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import path from "path";
 
 import { connectDB } from "./config/db.js";
 
@@ -27,7 +28,6 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      // allow requests with no origin (mobile apps, Postman)
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
@@ -43,7 +43,7 @@ app.use(
 // Middleware
 app.use(express.json());
 
-// ================= ROUTES =================
+// ================= API ROUTES =================
 
 app.use("/api/order", orderRoutes);
 app.use("/api/auth", authRoutes);
@@ -52,15 +52,33 @@ app.use("/api/visitor", visitorRoutes);
 app.use("/api/reviews", reviewRoutes);
 
 // ================= HEALTH CHECK =================
-app.get("/", (req, res) => {
-  res.send("🚀 API is running...");
-});
 
 app.get("/api/test", (req, res) => {
   res.json({ message: "API working ✅" });
 });
 
+// ================= SERVE FRONTEND =================
+
+// 🔥 IMPORTANT: path setup
+const __dirname = path.resolve();
+const distPath = path.join(__dirname, "../frontend/dist");
+
+// Serve static files
+app.use(express.static(distPath));
+
+// 🔥 SPA ROUTING FIX (VERY IMPORTANT)
+app.get("*", (req, res) => {
+  // if API route → return JSON
+  if (req.path.startsWith("/api")) {
+    return res.status(404).json({ message: "API route not found" });
+  }
+
+  // otherwise serve React app
+  res.sendFile(path.join(distPath, "index.html"));
+});
+
 // ================= ERROR HANDLER =================
+
 app.use((err, req, res, next) => {
   console.error("❌ Server Error:", err.message);
   res.status(500).json({
@@ -70,6 +88,7 @@ app.use((err, req, res, next) => {
 });
 
 // ================= SERVER =================
+
 const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, () => {
