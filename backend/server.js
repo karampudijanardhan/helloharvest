@@ -19,28 +19,14 @@ connectDB();
 
 const app = express();
 
-// ✅ FIXED __dirname (VERY IMPORTANT)
+// ✅ FIX __dirname (important for ES modules)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ✅ CORS
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:8080",
-  "https://helloharvest-frontend.onrender.com"
-];
-
+// ✅ CORS (final fix)
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        return callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: true, // allow all
     credentials: true
   })
 );
@@ -62,13 +48,13 @@ app.get("/api/test", (req, res) => {
 
 // ================= FRONTEND =================
 
-// 🔥 CORRECT PATH (FINAL)
+// 🔥 FINAL CORRECT PATH
 const distPath = path.join(__dirname, "../frontend/dist");
 
-// serve static files
+// serve frontend static
 app.use(express.static(distPath));
 
-// SPA fallback
+// SPA fallback (for refresh)
 app.use((req, res, next) => {
   if (req.path.startsWith("/api")) return next();
   res.sendFile(path.join(distPath, "index.html"));
