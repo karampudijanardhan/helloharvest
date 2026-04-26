@@ -18,7 +18,7 @@ connectDB();
 
 const app = express();
 
-// ✅ CORS (clean + flexible)
+// ✅ CORS
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:8080",
@@ -44,41 +44,36 @@ app.use(
 app.use(express.json());
 
 // ================= API ROUTES =================
-
 app.use("/api/order", orderRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/visitor", visitorRoutes);
 app.use("/api/reviews", reviewRoutes);
 
-// ================= HEALTH CHECK =================
-
+// ================= HEALTH =================
 app.get("/api/test", (req, res) => {
   res.json({ message: "API working ✅" });
 });
 
-// ================= SERVE FRONTEND =================
+// ================= FRONTEND =================
 
-// 🔥 IMPORTANT: path setup
+// 🔥 path setup
 const __dirname = path.resolve();
 const distPath = path.join(__dirname, "../frontend/dist");
 
-// Serve static files
+// serve static files
 app.use(express.static(distPath));
 
-// 🔥 SPA ROUTING FIX (VERY IMPORTANT)
-app.get("*", (req, res) => {
-  // if API route → return JSON
+// 🔥 FIXED WILDCARD (NO CRASH)
+app.get("/*", (req, res) => {
   if (req.path.startsWith("/api")) {
     return res.status(404).json({ message: "API route not found" });
   }
 
-  // otherwise serve React app
   res.sendFile(path.join(distPath, "index.html"));
 });
 
-// ================= ERROR HANDLER =================
-
+// ================= ERROR =================
 app.use((err, req, res, next) => {
   console.error("❌ Server Error:", err.message);
   res.status(500).json({
@@ -88,7 +83,6 @@ app.use((err, req, res, next) => {
 });
 
 // ================= SERVER =================
-
 const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, () => {
