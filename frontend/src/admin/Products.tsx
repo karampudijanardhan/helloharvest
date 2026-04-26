@@ -15,7 +15,7 @@ const Products = () => {
     try {
 
       const res = await axios.get(
-        "http://localhost:5000/api/products"
+        "https://helloharvest.onrender.com/api/products"
       );
 
       setProducts(res.data);

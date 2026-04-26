@@ -21,7 +21,7 @@ const ForgotPassword: React.FC = () => {
     try {
 
       await axios.post(
-        "https://vov-foods-1.onrender.com/api/auth/reset-password",
+        "https://helloharvest.onrender.com/api/auth/reset-password",
         {
           username,
           newPassword

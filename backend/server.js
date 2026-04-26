@@ -17,14 +17,25 @@ connectDB();
 
 const app = express();
 
-// ✅ CORS (ALLOW YOUR FRONTEND URL AFTER DEPLOY)
+// ✅ CORS (clean + flexible)
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:8080",
+  "https://helloharvest-frontend.onrender.com"
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:8080",
-      "https://helloharvest-frontend.onrender.com" // 👈 add your frontend URL here
-    ],
+    origin: function (origin, callback) {
+      // allow requests with no origin (mobile apps, Postman)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true
   })
 );
@@ -34,14 +45,13 @@ app.use(express.json());
 
 // ================= ROUTES =================
 
-// API ROUTES
 app.use("/api/order", orderRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/visitor", visitorRoutes);
 app.use("/api/reviews", reviewRoutes);
 
-// TEST ROUTE
+// ================= HEALTH CHECK =================
 app.get("/", (req, res) => {
   res.send("🚀 API is running...");
 });
@@ -52,8 +62,11 @@ app.get("/api/test", (req, res) => {
 
 // ================= ERROR HANDLER =================
 app.use((err, req, res, next) => {
-  console.error("Server Error:", err.message);
-  res.status(500).json({ message: "Internal Server Error" });
+  console.error("❌ Server Error:", err.message);
+  res.status(500).json({
+    success: false,
+    message: err.message || "Internal Server Error"
+  });
 });
 
 // ================= SERVER =================

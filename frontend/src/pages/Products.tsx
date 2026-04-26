@@ -9,8 +9,7 @@ import { mockProducts } from "@/data/mockProducts";
 import axios from "axios";
 import { useParams } from "react-router-dom"; // ✅ ADDED
 
-const API = "http://localhost:5000/api";
-
+const API = "https://helloharvest.onrender.com/api";
 const Products = () => {
 
   const { category } = useParams(); // ✅ ADDED

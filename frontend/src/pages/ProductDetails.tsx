@@ -11,7 +11,7 @@ import { ProductGrid } from "@/components/product/ProductGrid";
 import ReviewSection from "@/components/product/ReviewSection";
 import axios from "axios";
 
-const API = "http://localhost:5000/api";
+const API = "https://helloharvest.onrender.com/api";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();

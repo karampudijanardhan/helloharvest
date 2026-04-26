@@ -41,7 +41,7 @@ const Signup: React.FC = () => {
     try {
       // ✅ NEW BACKEND API
       await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        "https://helloharvest.onrender.com/api/auth/signup",
         {
           username: form.username,
           password: form.password

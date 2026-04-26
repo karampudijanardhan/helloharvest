@@ -78,7 +78,7 @@ const Checkout = () => {
 
     // ✅ NEW: BACKEND SAVE (ONLY ADDITION)
     try {
-      await axios.post("http://localhost:5000/api/order", {
+      await axios.post("https://helloharvest.onrender.com/api/order", {
         username,
         name: formData.name,
         phone: formData.phone,

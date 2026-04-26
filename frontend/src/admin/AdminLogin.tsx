@@ -32,7 +32,7 @@ const AdminLogin: React.FC = () => {
     try {
 
       const res = await fetch(
-  "http://localhost:5000/api/auth/admin-login",
+  "https://helloharvest.onrender.com/api/auth/admin-login",
   {
     method: "POST",
     headers: {

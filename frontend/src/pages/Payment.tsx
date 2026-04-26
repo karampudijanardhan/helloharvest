@@ -77,9 +77,9 @@ const Payment = () => {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5000/api/order",
-        orderData
-      );
+  "https://helloharvest.onrender.com/api/order",
+  orderData
+);
 
       if (res.data.success) {
 

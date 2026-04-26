@@ -32,8 +32,8 @@ const TrackOrder = () => {
         console.log("URL orderId param =", orderId);
 
         const res = await axios.get(
-          `http://localhost:5000/api/order/track/${orderId}`
-        );
+  `https://helloharvest.onrender.com/api/order/track/${orderId}`
+);
 
         console.log("Track API response =", res.data);
 
