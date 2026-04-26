@@ -64,10 +64,10 @@ const distPath = path.join(__dirname, "../frontend/dist");
 // serve static files
 app.use(express.static(distPath));
 
-// 🔥 FIXED WILDCARD (NO CRASH)
-app.get("/*", (req, res) => {
+// 🔥 FINAL SPA FIX (NO wildcard, NO crash)
+app.use((req, res, next) => {
   if (req.path.startsWith("/api")) {
-    return res.status(404).json({ message: "API route not found" });
+    return next();
   }
 
   res.sendFile(path.join(distPath, "index.html"));
