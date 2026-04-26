@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
+import { fileURLToPath } from "url";
 
 import { connectDB } from "./config/db.js";
 
@@ -17,6 +18,10 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+// ✅ FIXED __dirname (VERY IMPORTANT)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // ✅ CORS
 const allowedOrigins = [
@@ -57,14 +62,13 @@ app.get("/api/test", (req, res) => {
 
 // ================= FRONTEND =================
 
-// 🔥 CORRECT PATH (this was the issue)
-const __dirname = path.resolve();
-const distPath = path.join(__dirname, "../../frontend/dist");
+// 🔥 CORRECT PATH (FINAL)
+const distPath = path.join(__dirname, "../frontend/dist");
 
 // serve static files
 app.use(express.static(distPath));
 
-// 🔥 SPA fallback (no wildcard crash)
+// SPA fallback
 app.use((req, res, next) => {
   if (req.path.startsWith("/api")) return next();
   res.sendFile(path.join(distPath, "index.html"));
