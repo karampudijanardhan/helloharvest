@@ -1,7 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import path from "path";
 
 import { connectDB } from "./config/db.js";
 
@@ -18,10 +17,14 @@ connectDB();
 
 const app = express();
 
-// ✅ CORS (important for frontend connection)
+// ✅ CORS (ALLOW YOUR FRONTEND URL AFTER DEPLOY)
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:8080"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:8080",
+      "https://helloharvest-frontend.onrender.com" // 👈 add your frontend URL here
+    ],
     credentials: true
   })
 );
@@ -39,27 +42,12 @@ app.use("/api/visitor", visitorRoutes);
 app.use("/api/reviews", reviewRoutes);
 
 // TEST ROUTE
-app.get("/api/test", (req, res) => {
-  res.json({ message: "API working ✅" });
+app.get("/", (req, res) => {
+  res.send("🚀 API is running...");
 });
 
-// ================= FRONTEND =================
-
-// Serve frontend (for production)
-const __dirname = path.resolve();
-const distPath = path.join(__dirname, "../frontend/dist");
-
-app.use(express.static(distPath));
-
-// SPA fallback
-app.use((req, res) => {
-  if (req.path.startsWith("/api")) {
-    return res.status(404).json({
-      message: "API route not found"
-    });
-  }
-
-  res.sendFile(path.join(distPath, "index.html"));
+app.get("/api/test", (req, res) => {
+  res.json({ message: "API working ✅" });
 });
 
 // ================= ERROR HANDLER =================
@@ -69,7 +57,7 @@ app.use((err, req, res, next) => {
 });
 
 // ================= SERVER =================
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
