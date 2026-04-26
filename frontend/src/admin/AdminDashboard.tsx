@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AdminLayout from "./AdminLayout";
 
-const API = "http://localhost:5000/api";
+const API = "https://helloharvest.onrender.com/api";
 
 const AdminDashboard = () => {
 

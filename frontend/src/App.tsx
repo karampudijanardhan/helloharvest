@@ -50,7 +50,7 @@ import AddProduct from "./admin/AddProduct";
 const queryClient = new QueryClient();
 
 // backend API
-const API = "http://localhost:5000/api";
+const API = "https://helloharvest.onrender.com/api";
 
 const AppLayout = () => {
   const location = useLocation();

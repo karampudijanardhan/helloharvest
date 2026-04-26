@@ -33,7 +33,7 @@ const Products = () => {
     try {
 
       await axios.delete(
-        `http://localhost:5000/api/products/${id}`
+        `https://helloharvest.onrender.com/api/products/${id}`
       );
 
       setProducts(products.filter(p => p._id !== id));
