@@ -57,19 +57,16 @@ app.get("/api/test", (req, res) => {
 
 // ================= FRONTEND =================
 
-// 🔥 path setup
+// 🔥 CORRECT PATH (this was the issue)
 const __dirname = path.resolve();
-const distPath = path.join(__dirname, "../frontend/dist");
+const distPath = path.join(__dirname, "../dist");
 
 // serve static files
 app.use(express.static(distPath));
 
-// 🔥 FINAL SPA FIX (NO wildcard, NO crash)
+// 🔥 SPA fallback (no wildcard crash)
 app.use((req, res, next) => {
-  if (req.path.startsWith("/api")) {
-    return next();
-  }
-
+  if (req.path.startsWith("/api")) return next();
   res.sendFile(path.join(distPath, "index.html"));
 });
 
