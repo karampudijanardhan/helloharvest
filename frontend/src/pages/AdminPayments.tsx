@@ -11,7 +11,7 @@ const AdminPayments = () => {
     try{
 
       const res = await axios.get(
-        "https://vov-foods-1.onrender.com/api/order"
+        "https://helloharvest.onrender.com/api/order"
       );
 
       setOrders(res.data);
@@ -34,10 +34,9 @@ const AdminPayments = () => {
 
     try {
 
-      await axios.put(
-        `https://vov-foods-1.onrender.com/api/order/verify/${id}`
-      );
-
+     await axios.put(
+  `https://helloharvest.onrender.com/api/order/verify/${id}`
+);
       // refresh orders
       fetchOrders();
 
