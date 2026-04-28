@@ -67,7 +67,7 @@ export const categories: Category[] = [
     description:
       "Authentic homemade pickles with rich flavors — crafted using traditional recipes for a true taste experience.",
     image:
-      "https://images.unsplash.com/photo-1582284540020-8acbe03f4924?w=400",
+      "/image (1).png",
     productCount: 9,
   },
 ];
