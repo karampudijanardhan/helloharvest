@@ -57,7 +57,7 @@ export const categories: Category[] = [
     description:
       "Pure, raw honey sourced from trusted farms — rich in antioxidants and perfect for boosting immunity naturally.",
     image:
-      "/IMG-20260426-WA0029.jpg",
+      "/image (1).png",
     productCount: 2,
   },
   {
