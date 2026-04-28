@@ -27,10 +27,10 @@ const Home = () => {
               transition={{ duration: 0.6 }}
               className="space-y-6"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
-                <Sparkles className="w-4 h-4" />
-                100% Natural • No Preservatives
-              </div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-600/10 text-green-400 text-sm font-medium backdrop-blur-sm">
+  <Sparkles className="w-4 h-4" />
+  100% Natural • No Preservatives
+</div>
               
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                 Pure{" "}
@@ -44,19 +44,26 @@ const Home = () => {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Link to="/products">
-                  <Button size="lg" className="gradient-saffron hover:opacity-90 gap-2">
-                    Explore Products
-                    <ArrowRight className="w-5 h-5" />
-                  </Button>
-                </Link>
-                <Link to="/offers">
-                  <Button size="lg" variant="outline" className="gap-2">
-                    View Offers
-                  </Button>
-                </Link>
-              </div>
+  <Link to="/products">
+    <Button
+      size="lg"
+      className="bg-green-700 hover:bg-green-500 text-white gap-2 transition-all duration-300"
+    >
+      Explore Products
+      <ArrowRight className="w-5 h-5" />
+    </Button>
+  </Link>
 
+  <Link to="/offers">
+    <Button
+      size="lg"
+      variant="outline"
+      className="gap-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white transition-all duration-300"
+    >
+      View Offers
+    </Button>
+  </Link>
+</div>
               {/* Trust badges */}
               <div className="flex flex-wrap gap-6 pt-6">
                 {[
@@ -230,15 +237,17 @@ const Home = () => {
             title="New Arrivals"
             description="Discover our latest healthy powder additions"
           />
-          
           <div className="text-center mt-8">
-            <Link to="/products">
-              <Button size="lg" className="gradient-saffron hover:opacity-90 gap-2">
-                View All Products
-                <ArrowRight className="w-5 h-5" />
-              </Button>
-            </Link>
-          </div>
+  <Link to="/products">
+    <Button
+      size="lg"
+      className="bg-green-700 hover:bg-green-500 text-white gap-2 transition-all duration-300"
+    >
+      View All Products
+      <ArrowRight className="w-5 h-5" />
+    </Button>
+  </Link>
+</div>
         </div>
       </section>
 

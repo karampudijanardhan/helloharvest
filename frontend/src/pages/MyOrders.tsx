@@ -33,10 +33,9 @@ const MyOrders = () => {
     const fetchOrders = async () => {
       try {
         const res = await axios.get(
-  `https://helloharvest.onrender.com/api/order/my/${username}`
-);
+          `https://helloharvest.onrender.com/api/order/my/${username}`
+        );
 
-        // ✅ backend fix
         if (Array.isArray(res.data)) {
           setOrders(res.data);
         } else {
@@ -62,13 +61,13 @@ const MyOrders = () => {
   // 🔐 Not logged in
   if (!token || !username) {
     return (
-      <div className="min-h-screen bg-gradient-warm flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
 
         <div className="bg-card shadow-card border-2 border-gray-300 rounded-xl p-8 text-center max-w-md w-full">
 
-          <PackageSearch className="w-10 h-10 mx-auto text-primary mb-3" />
+          <PackageSearch className="w-10 h-10 mx-auto text-green-600 mb-3" />
 
-          <h2 className="text-xl font-display font-semibold text-spice-brown mb-2">
+          <h2 className="text-xl font-display font-semibold text-foreground mb-2">
             Please Login
           </h2>
 
@@ -78,7 +77,7 @@ const MyOrders = () => {
 
           <button
             onClick={() => navigate("/login")}
-            className="px-6 py-2 rounded-lg gradient-saffron text-primary-foreground"
+            className="px-6 py-2 rounded-lg bg-green-700 hover:bg-green-500 text-white transition-all duration-300"
           >
             Go to Login
           </button>
@@ -91,18 +90,18 @@ const MyOrders = () => {
   // ⏳ Loading
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-warm flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <p className="text-muted-foreground">Loading your orders...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-warm">
+    <div className="min-h-screen bg-background">
 
       <div className="container py-10">
 
-        <h1 className="text-3xl font-display font-bold text-spice-brown mb-6">
+        <h1 className="text-3xl font-display font-bold text-foreground mb-6">
           My Orders
         </h1>
 
@@ -120,19 +119,19 @@ const MyOrders = () => {
 
             <div
               key={order._id}
-              className="bg-card rounded-xl shadow-card border-2 border-gray-300 p-6 hover:border-orange-400 transition"
+              className="bg-card rounded-xl shadow-card border-2 border-gray-300 p-6 hover:border-green-500 transition-all"
             >
 
               <div className="flex justify-between items-center mb-2">
 
                 <p className="font-medium">
                   Order ID:
-                  <span className="text-primary ml-1">
+                  <span className="text-green-600 ml-1">
                     {order.orderRef}
                   </span>
                 </p>
 
-                <span className="text-sm font-semibold text-primary">
+                <span className="text-sm font-semibold text-green-600">
                   {order.status}
                 </span>
 
@@ -143,13 +142,11 @@ const MyOrders = () => {
               </p>
 
               <ul className="text-sm space-y-1">
-
                 {(order.items || []).map((item, i) => (
                   <li key={i}>
                     {item.name} ({item.weight}) × {item.qty}
                   </li>
                 ))}
-
               </ul>
 
               <div className="border-t border-border mt-3 pt-3 flex justify-between items-center font-semibold">
@@ -159,10 +156,9 @@ const MyOrders = () => {
                   <span>₹{order.totalAmount}</span>
                 </div>
 
-                {/* ✅ VIEW DETAILS BUTTON RESTORED */}
                 <button
                   onClick={() => navigate(`/track/${order._id}`)}
-                  className="px-4 py-1.5 text-sm rounded-lg gradient-saffron text-primary-foreground"
+                  className="px-4 py-1.5 text-sm rounded-lg bg-green-700 hover:bg-green-500 text-white transition-all duration-300"
                 >
                   View Details
                 </button>

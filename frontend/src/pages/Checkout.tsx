@@ -286,12 +286,12 @@ const Checkout = () => {
                 </div>
 
                 <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full gradient-saffron hover:opacity-90"
-                >
-                  Continue to Payment • ₹{total}
-                </Button>
+  type="submit"
+  size="lg"
+  className="w-full bg-green-700 hover:bg-green-500 text-white transition-all duration-300"
+>
+  Continue to Payment • ₹{total}
+</Button>
 
               </form>
 

@@ -14,7 +14,7 @@ const stepMeta = [
 ];
 
 const TrackOrder = () => {
-  const { orderId } = useParams<{ orderId: string }>(); // 👈 typed param
+  const { orderId } = useParams<{ orderId: string }>();
 
   const [status, setStatus] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -29,13 +29,9 @@ const TrackOrder = () => {
           return;
         }
 
-        console.log("URL orderId param =", orderId);
-
         const res = await axios.get(
-  `https://helloharvest.onrender.com/api/order/track/${orderId}`
-);
-
-        console.log("Track API response =", res.data);
+          `https://helloharvest.onrender.com/api/order/track/${orderId}`
+        );
 
         setStatus(res.data.status);
       } catch (err) {
@@ -55,7 +51,9 @@ const TrackOrder = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <section className="gradient-warm py-12">
+      
+      {/* 🔥 REMOVE gradient-warm → keep clean */}
+      <section className="py-12">
         <div className="container text-center">
           <h1 className="font-display text-4xl font-bold mb-4">
             Track Your Order
@@ -97,13 +95,13 @@ const TrackOrder = () => {
                     <div className="flex flex-col items-center">
                       <div
                         className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                          done ? "gradient-saffron" : "bg-muted"
+                          done ? "bg-green-600" : "bg-muted"
                         }`}
                       >
                         <step.icon
                           className={`w-6 h-6 ${
                             done
-                              ? "text-primary-foreground"
+                              ? "text-white"
                               : "text-muted-foreground"
                           }`}
                         />
@@ -112,7 +110,7 @@ const TrackOrder = () => {
                       {i < stepMeta.length - 1 && (
                         <div
                           className={`w-0.5 h-16 ${
-                            done ? "bg-primary" : "bg-border"
+                            done ? "bg-green-500" : "bg-border"
                           }`}
                         />
                       )}
@@ -122,7 +120,7 @@ const TrackOrder = () => {
                       <h3
                         className={`font-semibold ${
                           done
-                            ? "text-foreground"
+                            ? "text-green-600"
                             : "text-muted-foreground"
                         }`}
                       >
@@ -137,6 +135,7 @@ const TrackOrder = () => {
               })}
             </div>
           )}
+
         </div>
       </section>
     </div>

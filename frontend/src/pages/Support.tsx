@@ -63,8 +63,8 @@ const Support = () => {
             {
               icon: Phone,
               title: "Call Support",
-              desc: "+91 8106044154",
-              action: () => window.open("tel:+918106044154"),
+              desc: "+91 7893064679",
+              action: () => window.open("tel:+917893064679"),
               btn: "Call Now"
             },
             {

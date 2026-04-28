@@ -13,9 +13,9 @@ export const Footer = () => {
             <div className="flex items-center gap-3">
 
               {/* Logo */}
-              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/30 shadow-md hover:scale-105 transition-all duration-300">
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-green-600 hover:border-green-400 shadow-md hover:shadow-[0_0_10px_rgba(34,197,94,0.4)] hover:scale-105 transition-all duration-300">
   <img
-    src="/IMG_20260325_211123_290.webp"
+    src="/white logo.png"
     alt="HelloHarvest Pure Powders Logo"
     className="w-full h-full object-cover"
   />
@@ -38,13 +38,10 @@ export const Footer = () => {
 
             {/* Social */}
             <div className="flex gap-3">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-all">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-all">
+              <a href="https://www.instagram.com/helloharvestpurepowder?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-all">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-all">
+              <a href="https://youtube.com/@helloharvestpurepowders?si=5HMxOmbLr7z62Y_k" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-all">
                 <Youtube className="w-5 h-5" />
               </a>
             </div>
@@ -116,8 +113,8 @@ export const Footer = () => {
 
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary" />
-                <a href="tel:+918106044154" className="text-sm text-white/80">
-                  +91 8106044154
+                <a href="tel:+917893064679" className="text-sm text-white/80">
+                  +91 7893064679
                 </a>
               </li>
 

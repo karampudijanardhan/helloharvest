@@ -111,27 +111,27 @@ export const Navbar = () => {
 <header className="sticky top-0 z-50 w-full">
 
 {/* TOP BAR */}
-<div className="bg-primary text-primary-foreground text-sm py-2">
-<div className="container flex justify-between items-center">
+<div className="bg-green-700 text-white text-sm py-2">
+  <div className="container flex justify-between items-center">
 
-<div className="flex items-center gap-4">
-<a href="tel:+919121971848" className="flex items-center gap-1">
-<Phone className="w-3 h-3" />
-<span className="hidden sm:inline">+91 8106044154</span>
-</a>
+    <div className="flex items-center gap-4">
+      <a href="tel:+917893064679" className="flex items-center gap-1 hover:text-green-200 transition">
+        <Phone className="w-3 h-3" />
+        <span className="hidden sm:inline">+91 7893064679</span>
+      </a>
 
-<Link to="/find-store" className="flex items-center gap-1">
-<MapPin className="w-3 h-3" />
-<span className="hidden sm:inline">Find a Store</span>
-</Link>
-</div>
+      <Link to="/find-store" className="flex items-center gap-1 hover:text-green-200 transition">
+        <MapPin className="w-3 h-3" />
+        <span className="hidden sm:inline">Find a Store</span>
+      </Link>
+    </div>
 
-<Link to="/offers" className="flex items-center gap-1">
-<Gift className="w-3 h-3" />
-<span>Get 20% Off on First Order!</span>
-</Link>
+    <Link to="/offers" className="flex items-center gap-1 hover:text-green-200 transition">
+      <Gift className="w-3 h-3" />
+      <span>Get 20% Off on First Order!</span>
+    </Link>
 
-</div>
+  </div>
 </div>
 
 {/* NAVBAR */}
@@ -149,13 +149,13 @@ export const Navbar = () => {
   onClick={handleAdminClicks}
 >
   {/* Circle Logo */}
-  <div className="w-15 h-14 rounded-full overflow-hidden border-2 border-primary shadow-md hover:scale-105 transition-all duration-300">
-    <img
-      src="/IMG_20260325_211123_290.webp"
-      alt="HelloHarvest Pure Powders Logo"
-      className="w-full h-full object-cover"
-    />
-  </div>
+  <div className="w-15 h-14 rounded-full overflow-hidden border-2 border-green-600 shadow-md hover:scale-105 transition-all duration-300">
+  <img
+    src="/white logo.png"
+    alt="HelloHarvest Pure Powders Logo"
+    className="w-full h-full object-cover"
+  />
+</div>
 
   {/* Brand Text */}
   <div className="hidden sm:flex flex-col leading-tight">
@@ -198,21 +198,35 @@ className="pl-10"
 
 <div className="hidden lg:flex gap-2 items-center">
 
-{!isLoggedIn ? (
-<Link to="/login">
-<Button size="sm">Login</Button>
-</Link>
-) : (
-<>
-<Link to="/my-orders">
-<Button size="sm">My Orders</Button>
-</Link>
+  {!isLoggedIn ? (
+    <Link to="/login">
+      <Button
+        size="sm"
+        className="bg-green-700 hover:bg-green-500 text-white transition-all duration-300"
+      >
+        Login
+      </Button>
+    </Link>
+  ) : (
+    <>
+      <Link to="/my-orders">
+        <Button
+          size="sm"
+          className="bg-green-600 hover:bg-green-500 text-white transition-all duration-300"
+        >
+          My Orders
+        </Button>
+      </Link>
 
-<Button size="sm" onClick={handleLogout}>
-Logout
+      <Button
+  size="sm"
+  onClick={handleLogout}
+  className="bg-green-600 hover:bg-green-500 text-white transition-all duration-300"
+>
+  Logout
 </Button>
-</>
-)}
+    </>
+  )}
 
 </div>
 

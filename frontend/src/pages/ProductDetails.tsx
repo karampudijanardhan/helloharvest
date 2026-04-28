@@ -16,10 +16,8 @@ const API = "https://helloharvest.onrender.com/api";
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
 
-  // ✅ ONLY CHANGE: products state
   const [products, setProducts] = useState(mockProducts);
 
-  // ✅ ONLY CHANGE: backend fetch
   useEffect(() => {
     axios.get(`${API}/products`)
       .then(res => {
@@ -28,7 +26,6 @@ const ProductDetails = () => {
       .catch(() => console.log("Using mock"));
   }, []);
 
-  // ✅ ONLY CHANGE: support _id
   const product = products.find(
     (p: any) => p._id === id || p.id === id
   );
@@ -49,7 +46,6 @@ const ProductDetails = () => {
 
   const currentPrice = product.prices[selectedWeight];
 
-  // ✅ ONLY CHANGE: related products support _id
   const relatedProducts = products
     .filter((p: any) => p.category === product.category && (p._id !== product._id || p.id !== product.id))
     .slice(0, 4);
@@ -70,9 +66,10 @@ const ProductDetails = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      
       {/* Breadcrumb */}
       <div className="container py-4">
-        <Link to="/products" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+        <Link to="/products" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-green-600 transition-colors">
           <ArrowLeft className="w-4 h-4" />
           Back to Products
         </Link>
@@ -83,23 +80,15 @@ const ProductDetails = () => {
         <div className="grid lg:grid-cols-2 gap-12">
 
           {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="relative"
-          >
+          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} className="relative">
             <div className="aspect-square rounded-2xl overflow-hidden bg-muted">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
+              <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
             </div>
             
             {/* Badges */}
             <div className="absolute top-4 left-4 flex flex-col gap-2">
               {product.badges.map((badge) => (
-                <Badge key={badge} className="bg-primary text-primary-foreground shadow-lg">
+                <Badge key={badge} className="bg-green-600 text-white shadow-lg">
                   {badge}
                 </Badge>
               ))}
@@ -107,13 +96,10 @@ const ProductDetails = () => {
           </motion.div>
 
           {/* Details */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="space-y-6"
-          >
+          <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
+            
             <div>
-              <p className="text-primary font-medium uppercase tracking-wide mb-2">
+              <p className="text-green-600 font-medium uppercase tracking-wide mb-2">
                 {product.category}
               </p>
               <h1 className="font-display text-3xl md:text-4xl font-bold text-foreground">
@@ -121,10 +107,10 @@ const ProductDetails = () => {
               </h1>
             </div>
 
-            {/* Rating & Spice Level */}
+            {/* Rating */}
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-1">
-                <Star className="w-5 h-5 fill-secondary text-secondary" />
+                <Star className="w-5 h-5 fill-green-500 text-green-500" />
                 <span className="font-semibold">{product.rating}</span>
                 <span className="text-muted-foreground">(120+ reviews)</span>
               </div>
@@ -162,8 +148,8 @@ const ProductDetails = () => {
                     onClick={() => setSelectedWeight(weight)}
                     className={`px-6 py-3 rounded-xl border-2 font-medium transition-all ${
                       selectedWeight === weight
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "bg-background text-foreground border-border hover:border-primary"
+                        ? "bg-green-600 text-white border-green-600"
+                        : "bg-background text-foreground border-border hover:border-green-500"
                     }`}
                   >
                     {weight}
@@ -173,7 +159,7 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            {/* Quantity & Price */}
+            {/* Quantity */}
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="font-semibold mb-2">Quantity</h3>
@@ -194,14 +180,15 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            {/* Add to Cart */}
+            {/* Buttons */}
             <div className="flex gap-4">
-              <Button size="lg" onClick={handleAddToCart} className="flex-1 gradient-saffron hover:opacity-90 gap-2">
+              <Button size="lg" onClick={handleAddToCart} className="flex-1 bg-green-700 hover:bg-green-500 text-white gap-2 transition-all duration-300">
                 <ShoppingCart className="w-5 h-5" />
                 Add to Cart
               </Button>
+
               <Link to="/cart" className="flex-1">
-                <Button size="lg" variant="outline" className="w-full">
+                <Button size="lg" variant="outline" className="w-full border-green-500 text-green-600 hover:bg-green-500 hover:text-white transition-all duration-300">
                   Buy Now
                 </Button>
               </Link>
@@ -210,15 +197,15 @@ const ProductDetails = () => {
             {/* Info */}
             <div className="grid grid-cols-2 gap-4 pt-6 border-t border-border">
               <div className="flex items-center gap-3">
-                <Truck className="w-5 h-5 text-primary" />
+                <Truck className="w-5 h-5 text-green-500" />
                 Free Delivery
               </div>
               <div className="flex items-center gap-3">
-                <Shield className="w-5 h-5 text-primary" />
+                <Shield className="w-5 h-5 text-green-500" />
                 Shelf life: {product.shelfLife}
               </div>
               <div className="flex items-center gap-3">
-                <Check className="w-5 h-5 text-primary" />
+                <Check className="w-5 h-5 text-green-500" />
                 {product.stock} in stock
               </div>
             </div>
@@ -230,15 +217,15 @@ const ProductDetails = () => {
       <ReviewSection productId={product._id || product.id} />
 
       {relatedProducts.length > 0 && (
-        <section className="py-16 gradient-warm">
-          <div className="container">
-            <ProductGrid
-              products={relatedProducts}
-              title="You May Also Like"
-              description={`More delicious ${product.category} from our collection`}
-            />
-          </div>
-        </section>
+       <section className="py-16 bg-background">
+  <div className="container">
+    <ProductGrid
+      products={relatedProducts}
+      title="You May Also Like"
+      description={`More delicious ${product.category} from our collection`}
+    />
+  </div>
+</section>
       )}
     </div>
   );

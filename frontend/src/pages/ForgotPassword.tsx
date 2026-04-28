@@ -19,7 +19,6 @@ const ForgotPassword: React.FC = () => {
     }
 
     try {
-
       await axios.post(
         "https://helloharvest.onrender.com/api/auth/reset-password",
         {
@@ -29,22 +28,19 @@ const ForgotPassword: React.FC = () => {
       );
 
       alert("Password updated successfully ✅");
-
       navigate("/login");
 
     } catch (err: any) {
-
       alert(err.response?.data?.message || "Error updating password ❌");
-
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-warm px-4">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
 
-      <div className="w-full max-w-md bg-card rounded-xl shadow-card border-2 border-gray-300 p-8">
+      <div className="w-full max-w-md bg-card rounded-xl shadow-card border-2 border-gray-300 hover:border-green-500 transition p-8">
 
-        <h2 className="text-2xl text-center mb-6 font-semibold">
+        <h2 className="text-2xl text-center mb-6 font-semibold text-foreground">
           Reset Password
         </h2>
 
@@ -55,7 +51,7 @@ const ForgotPassword: React.FC = () => {
             placeholder="Enter Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg"
+            className="w-full px-4 py-2 border border-input rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-green-500"
             required
           />
 
@@ -64,7 +60,7 @@ const ForgotPassword: React.FC = () => {
             placeholder="New Password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg"
+            className="w-full px-4 py-2 border border-input rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-green-500"
             required
           />
 
@@ -73,13 +69,13 @@ const ForgotPassword: React.FC = () => {
             placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full px-4 py-2 border rounded-lg"
+            className="w-full px-4 py-2 border border-input rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-green-500"
             required
           />
 
           <button
             type="submit"
-            className="w-full py-2 bg-orange-500 text-white rounded-lg"
+            className="w-full py-2 bg-green-700 hover:bg-green-500 text-white rounded-lg transition-all duration-300"
           >
             Save Password
           </button>

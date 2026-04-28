@@ -30,21 +30,17 @@ const Login: React.FC = () => {
     setLoading(true);
 
     try {
-      // ✅ NEW BACKEND API (UPDATED)
       const res = await axios.post(
         "https://helloharvest.onrender.com/api/auth/login",
         form
       );
 
-      // 🔐 Save token
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("username", res.data.user.username);
 
-      // 🔔 Notify Navbar
       window.dispatchEvent(new Event("login-success"));
 
       alert("Login successful ✅");
-
       navigate("/");
     } catch (err: any) {
       console.error("Login error:", err);
@@ -55,11 +51,11 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-warm px-4 overflow-x-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4 overflow-x-hidden">
 
-      <div className="w-full max-w-md bg-card text-card-foreground rounded-xl shadow-card border-2 border-gray-300 hover:border-orange-400 transition p-8">
+      <div className="w-full max-w-md bg-card text-card-foreground rounded-xl shadow-card border-2 border-gray-300 hover:border-green-500 transition p-8">
 
-        <h2 className="text-2xl font-display text-center mb-6 text-spice-brown">
+        <h2 className="text-2xl font-display text-center mb-6 text-foreground">
           Login
         </h2>
 
@@ -77,7 +73,7 @@ const Login: React.FC = () => {
               value={form.username}
               onChange={handleChange}
               placeholder="Enter username"
-              className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-green-500"
               required
             />
           </div>
@@ -94,15 +90,14 @@ const Login: React.FC = () => {
               value={form.password}
               onChange={handleChange}
               placeholder="********"
-              className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-green-500"
               required
             />
 
-            {/* ✅ FORGOT PASSWORD (KEPT) */}
             <div className="text-right mt-1">
               <Link
                 to="/forgot-password"
-                className="text-sm text-primary hover:underline"
+                className="text-sm text-green-600 hover:underline"
               >
                 Forgot Password?
               </Link>
@@ -113,7 +108,7 @@ const Login: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 rounded-lg gradient-saffron text-primary-foreground font-medium shadow-warm hover:shadow-hover transition disabled:opacity-60"
+            className="w-full py-2 rounded-lg bg-green-700 hover:bg-green-500 text-white font-medium transition-all duration-300 disabled:opacity-60"
           >
             {loading ? "Logging in..." : "Login"}
           </button>
@@ -125,17 +120,17 @@ const Login: React.FC = () => {
           Don’t have an account?{" "}
           <Link
             to="/signup"
-            className="text-primary font-medium hover:underline"
+            className="text-green-600 font-medium hover:underline"
           >
             Sign up
           </Link>
         </p>
 
-        {/* ✅ ADMIN LOGIN (KEPT) */}
+        {/* Admin Login */}
         <div className="mt-6 text-center">
           <button
             onClick={() => navigate("/admin-login")}
-            className="w-full py-2 mt-2 rounded-lg border border-primary text-primary font-medium hover:bg-primary hover:text-white transition"
+            className="w-full py-2 mt-2 rounded-lg border border-green-600 text-green-600 font-medium hover:bg-green-600 hover:text-white transition-all duration-300"
           >
             Admin Login
           </button>

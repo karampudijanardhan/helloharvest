@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = "918106044154";
+const WHATSAPP_NUMBER = "917893064679";
 
 export const openWhatsAppChat = (message?: string) => {
   const defaultMessage = "Hello, I'd like to order natural & organic powders.";

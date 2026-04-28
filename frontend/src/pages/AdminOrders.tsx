@@ -13,10 +13,7 @@ const Orders = () => {
 
     const fetchOrders = async () => {
       try {
-        // ✅ FIXED API
         const res = await axios.get(`${API}/order`);
-
-        console.log("Orders API:", res.data);
 
         if (Array.isArray(res.data)) {
           setOrders(res.data);
@@ -36,12 +33,9 @@ const Orders = () => {
   }, []);
 
   const updateStatus = async (id: string, status: string) => {
-
     try {
-      // ✅ FIXED API
       await axios.put(`${API}/order/status/${id}`, { status });
 
-      // ✅ Update UI instantly
       setOrders(prev =>
         prev.map(o =>
           o._id === id ? { ...o, status } : o
@@ -51,14 +45,13 @@ const Orders = () => {
     } catch (err) {
       console.log("Status update error", err);
     }
-
   };
 
   return (
 
     <AdminLayout>
 
-      <h1 className="text-2xl font-display text-spice-brown mb-6">
+      <h1 className="text-2xl font-display text-foreground mb-6">
         Orders
       </h1>
 
@@ -84,7 +77,7 @@ const Orders = () => {
 
             <div
               key={order._id}
-              className="bg-card shadow-card border-2 border-gray-300 hover:border-orange-400 transition rounded-xl p-4 sm:p-6"
+              className="bg-card shadow-card border-2 border-gray-300 hover:border-green-500 transition rounded-xl p-4 sm:p-6"
             >
 
               {/* USER INFO */}
@@ -96,7 +89,7 @@ const Orders = () => {
                   <p className="text-sm text-muted-foreground">{order.address}</p>
                 </div>
 
-                <span className="px-3 py-1 rounded bg-muted text-sm w-fit">
+                <span className="px-3 py-1 rounded bg-green-100 text-green-700 text-sm w-fit">
                   {order.status}
                 </span>
 
@@ -134,28 +127,28 @@ const Orders = () => {
 
                 <button
                   onClick={() => updateStatus(order._id, "PACKING")}
-                  className="px-3 py-1 rounded gradient-gold text-white text-sm"
+                  className="px-3 py-1 rounded bg-green-600 hover:bg-green-500 text-white text-sm transition"
                 >
                   Packing
                 </button>
 
                 <button
                   onClick={() => updateStatus(order._id, "SHIPPED")}
-                  className="px-3 py-1 rounded gradient-saffron text-white text-sm"
+                  className="px-3 py-1 rounded bg-green-700 hover:bg-green-600 text-white text-sm transition"
                 >
                   Shipped
                 </button>
 
                 <button
                   onClick={() => updateStatus(order._id, "OUT_FOR_DELIVERY")}
-                  className="px-3 py-1 rounded bg-secondary text-white text-sm"
+                  className="px-3 py-1 rounded bg-green-500 hover:bg-green-400 text-white text-sm transition"
                 >
                   Out for Delivery
                 </button>
 
                 <button
                   onClick={() => updateStatus(order._id, "DELIVERED")}
-                  className="px-3 py-1 rounded bg-accent text-white text-sm"
+                  className="px-3 py-1 rounded bg-green-800 hover:bg-green-700 text-white text-sm transition"
                 >
                   Delivered
                 </button>

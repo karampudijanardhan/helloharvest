@@ -330,15 +330,13 @@ const Payment = () => {
 
                 </div>
 
-                <Button
-                  className="w-full mt-3"
-                  onClick={placeOrder}
-                  disabled={loading}
-                >
-
-                  {loading ? "Placing Order..." : "Confirm Order"}
-
-                </Button>
+              <Button
+  className="w-full mt-3 bg-green-700 hover:bg-green-500 text-white transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+  onClick={placeOrder}
+  disabled={loading}
+>
+  {loading ? "Placing Order..." : "Confirm Order"}
+</Button>
 
               </div>
 

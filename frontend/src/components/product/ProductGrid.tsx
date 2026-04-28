@@ -5,7 +5,7 @@ interface ProductGridProps {
   products: any[];
   title?: string;
   description?: string;
-  reduceStock?: (productId: string, quantity?: number) => void; // ✅ keep
+  reduceStock?: (productId: string, quantity?: number) => void;
 }
 
 export const ProductGrid = ({ products, title, description, reduceStock }: ProductGridProps) => {
@@ -38,6 +38,8 @@ export const ProductGrid = ({ products, title, description, reduceStock }: Produ
             </p>
           )}
 
+          {/* 🔥 small green accent line (premium touch) */}
+          <div className="w-20 h-1 bg-green-500 mx-auto rounded-full mt-3" />
         </div>
       )}
 
@@ -52,11 +54,15 @@ export const ProductGrid = ({ products, title, description, reduceStock }: Produ
       >
 
         {products.map((product: any) => (
-          <ProductCard
-            key={product._id || product.id}   // ✅ FIX (important)
-            product={product}
-            reduceStock={reduceStock}        // ✅ keep feature
-          />
+          <div
+            key={product._id || product.id}
+            className="transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(22,163,74,0.2)] rounded-xl"
+          >
+            <ProductCard
+              product={product}
+              reduceStock={reduceStock}
+            />
+          </div>
         ))}
 
       </motion.div>

@@ -21,11 +21,9 @@ export const ProductCard = ({ product, reduceStock }: ProductCardProps) => {
   const { toast } = useToast();
 
   const currentPrice = product.prices[selectedWeight];
-
   const isOutOfStock = product.stock <= 0;
 
   const handleAddToCart = () => {
-
     if (product.stock <= 0) {
       toast({
         title: "Out of Stock",
@@ -36,21 +34,18 @@ export const ProductCard = ({ product, reduceStock }: ProductCardProps) => {
     }
 
     addToCart(product, selectedWeight, 1);
-
-    // ✅ FIX ONLY THIS LINE
     reduceStock?.(product._id || product.id, 1);
 
     toast({
       title: "Added to cart!",
       description: `${product.name} (${selectedWeight}) added to your cart.`,
     });
-
   };
 
   const spiceLevelColors = {
-    mild: "bg-cardamom/20 text-cardamom",
-    medium: "bg-secondary/20 text-secondary-foreground",
-    hot: "bg-accent/20 text-accent",
+    mild: "bg-green-100 text-green-600",
+    medium: "bg-green-200 text-green-700",
+    hot: "bg-green-300 text-green-800",
   };
 
   return (
@@ -59,7 +54,7 @@ export const ProductCard = ({ product, reduceStock }: ProductCardProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       whileHover={{ y: -4 }}
-      className="group bg-card rounded-xl overflow-hidden shadow-card hover:shadow-hover transition-all duration-300"
+      className="group bg-card rounded-xl overflow-hidden shadow-md hover:shadow-[0_10px_25px_rgba(22,163,74,0.2)] transition-all duration-300"
     >
 
       {/* Image */}
@@ -76,7 +71,7 @@ export const ProductCard = ({ product, reduceStock }: ProductCardProps) => {
           {product.badges.slice(0, 2).map((badge) => (
             <Badge
               key={badge}
-              className="bg-primary text-primary-foreground text-xs shadow-md"
+              className="bg-green-600 text-white text-xs shadow-md"
             >
               {badge}
             </Badge>
@@ -90,10 +85,9 @@ export const ProductCard = ({ product, reduceStock }: ProductCardProps) => {
         </div>
 
         {/* Quick View */}
-        <div className="absolute inset-0 bg-foreground/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-          {/* ✅ FIX ONLY THIS LINE */}
+        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
           <Link to={`/product/${product._id || product.id}`}>
-            <Button variant="secondary" size="sm" className="gap-2">
+            <Button variant="secondary" size="sm" className="gap-2 bg-green-600 text-white hover:bg-green-500">
               <Eye className="w-4 h-4" />
               Quick View
             </Button>
@@ -117,12 +111,12 @@ export const ProductCard = ({ product, reduceStock }: ProductCardProps) => {
         {/* Category & Rating */}
         <div className="flex items-center justify-between">
 
-          <span className="text-xs font-medium text-primary uppercase tracking-wide">
+          <span className="text-xs font-medium text-green-600 uppercase tracking-wide">
             {product.category}
           </span>
 
           <div className="flex items-center gap-1">
-            <Star className="w-4 h-4 fill-secondary text-secondary" />
+            <Star className="w-4 h-4 fill-green-500 text-green-500" />
             <span className="text-sm font-medium">
               {product.rating}
             </span>
@@ -132,7 +126,6 @@ export const ProductCard = ({ product, reduceStock }: ProductCardProps) => {
 
         {/* Title */}
         <div>
-
           <h3 className="font-display font-semibold text-lg text-foreground line-clamp-1">
             {product.name}
           </h3>
@@ -140,26 +133,23 @@ export const ProductCard = ({ product, reduceStock }: ProductCardProps) => {
           <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
             {product.description}
           </p>
-
         </div>
 
         {/* Weight Selector */}
         <div className="flex gap-2">
-
           {product.weightOptions.map((weight) => (
             <button
               key={weight}
               onClick={() => setSelectedWeight(weight)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
                 selectedWeight === weight
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "bg-background text-foreground border-border hover:border-primary"
+                  ? "bg-green-600 text-white border-green-600"
+                  : "bg-background text-foreground border-border hover:border-green-500"
               }`}
             >
               {weight}
             </button>
           ))}
-
         </div>
 
         {/* Shelf Life */}
@@ -188,7 +178,7 @@ export const ProductCard = ({ product, reduceStock }: ProductCardProps) => {
             size="sm"
             onClick={handleAddToCart}
             disabled={isOutOfStock}
-            className="gap-2 gradient-saffron hover:opacity-90"
+            className="gap-2 bg-green-700 hover:bg-green-500 text-white transition-all duration-300"
           >
             <ShoppingCart className="w-4 h-4" />
             {isOutOfStock ? "Out of Stock" : "Add"}

@@ -30,7 +30,6 @@ const Signup: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // ✅ Password match check
     if (form.password !== form.confirmPassword) {
       alert("Passwords do not match ❌");
       return;
@@ -39,7 +38,6 @@ const Signup: React.FC = () => {
     setLoading(true);
 
     try {
-      // ✅ NEW BACKEND API
       await axios.post(
         "https://helloharvest.onrender.com/api/auth/signup",
         {
@@ -54,29 +52,23 @@ const Signup: React.FC = () => {
       );
 
       alert("Signup successful ✅. Please login.");
-
       navigate("/login");
 
     } catch (err: any) {
-
       console.error("Signup error:", err);
-
       alert(err.response?.data?.message || "Signup failed ❌");
-
     } finally {
-
       setLoading(false);
-
     }
   };
 
   return (
 
-    <div className="min-h-screen flex items-center justify-center bg-gradient-warm px-4 overflow-x-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4 overflow-x-hidden">
 
-      <div className="w-full max-w-md bg-card text-card-foreground rounded-xl shadow-card border-2 border-gray-300 hover:border-orange-400 transition p-8">
+      <div className="w-full max-w-md bg-card text-card-foreground rounded-xl shadow-card border-2 border-gray-300 hover:border-green-500 transition p-8">
 
-        <h2 className="text-2xl font-display text-center mb-6 text-spice-brown">
+        <h2 className="text-2xl font-display text-center mb-6 text-foreground">
           Create Account
         </h2>
 
@@ -94,7 +86,7 @@ const Signup: React.FC = () => {
               value={form.username}
               onChange={handleChange}
               placeholder="Choose a username"
-              className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-green-500"
               required
             />
           </div>
@@ -111,7 +103,7 @@ const Signup: React.FC = () => {
               value={form.password}
               onChange={handleChange}
               placeholder="Create a password"
-              className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-green-500"
               required
             />
           </div>
@@ -128,7 +120,7 @@ const Signup: React.FC = () => {
               value={form.confirmPassword}
               onChange={handleChange}
               placeholder="Re-enter password"
-              className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full px-4 py-2 rounded-lg border border-input bg-background focus:outline-none focus:ring-2 focus:ring-green-500"
               required
             />
           </div>
@@ -137,7 +129,7 @@ const Signup: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 rounded-lg gradient-gold text-secondary-foreground font-medium shadow-warm hover:shadow-hover transition disabled:opacity-60"
+            className="w-full py-2 rounded-lg bg-green-700 hover:bg-green-500 text-white font-medium transition-all duration-300 disabled:opacity-60"
           >
             {loading ? "Creating..." : "Create Account"}
           </button>
@@ -149,7 +141,7 @@ const Signup: React.FC = () => {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-primary font-medium hover:underline"
+            className="text-green-600 font-medium hover:underline"
           >
             Login
           </Link>

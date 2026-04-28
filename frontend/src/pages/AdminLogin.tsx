@@ -12,10 +12,10 @@ const AdminLogin = () => {
     e.preventDefault();
 
     try {
-     const res = await axios.post(
-  "https://helloharvest.onrender.com/api/auth/admin-login",
-  { email: email.trim().toLowerCase() }
-);
+      const res = await axios.post(
+        "https://helloharvest.onrender.com/api/auth/admin-login",
+        { email: email.trim().toLowerCase() }
+      );
 
       localStorage.setItem("adminToken", res.data.token);
 
@@ -56,9 +56,10 @@ const AdminLogin = () => {
             required
           />
 
+          {/* ✅ GREEN BUTTON */}
           <button
             type="submit"
-            className="w-full py-2 rounded-lg gradient-saffron text-primary-foreground font-medium shadow-warm hover:shadow-hover transition"
+            className="w-full py-2 rounded-lg bg-green-700 hover:bg-green-500 text-white font-medium transition-all duration-300"
           >
             Login
           </button>
