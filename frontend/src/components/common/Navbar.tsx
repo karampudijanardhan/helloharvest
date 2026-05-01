@@ -169,18 +169,24 @@ export const Navbar = () => {
 </div>
 
 {/* SEARCH */}
-<form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-md">
-<div className="relative w-full">
-<Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" />
-<Input
-type="search"
-placeholder="Search powders..."
-value={searchQuery}
-onChange={(e) => setSearchQuery(e.target.value)}
-className="pl-10"
-/>
+{/* MOBILE SEARCH */}
+<div className="md:hidden px-1 pb-3">
+  <form onSubmit={handleSearch}>
+    <div className="relative">
+
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+
+      <input
+        type="search"
+        placeholder="Search products..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="w-full pl-10 pr-3 py-2 rounded-full bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-green-500"
+      />
+
+    </div>
+  </form>
 </div>
-</form>
 
 {/* RIGHT */}
 <div className="flex items-center gap-2">

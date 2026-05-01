@@ -7,25 +7,26 @@ import {
   CreditCard,
   Package,
   LogOut,
+  X
 } from "lucide-react";
 
 const AdminSidebar = () => {
-
   const location = useLocation();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
+  // Close sidebar on route change (mobile)
   useEffect(() => {
     setOpen(false);
   }, [location.pathname]);
 
   const activeLink = (path: string) =>
     location.pathname === path
-      ? "gradient-saffron text-white"
+      ? "bg-green-700 text-white"
       : "text-muted-foreground hover:bg-muted";
 
   const handleLogout = () => {
-    localStorage.removeItem("adminToken"); // ✅ fixed
+    localStorage.removeItem("adminToken");
     navigate("/");
   };
 
@@ -39,70 +40,83 @@ const AdminSidebar = () => {
         <Menu size={22} />
       </button>
 
+      {/* OVERLAY */}
+      {open && (
+        <div
+          onClick={() => setOpen(false)}
+          className="fixed inset-0 bg-black/40 z-30 lg:hidden"
+        />
+      )}
+
       {/* SIDEBAR */}
       <aside
         className={`
-          fixed top-0 left-0 z-40 h-full bg-card border-r border-border shadow-card
+          fixed top-0 left-0 z-40 h-full bg-card border-r shadow-lg
           transform transition-transform duration-300
           ${open ? "translate-x-0" : "-translate-x-full"}
 
-          w-full lg:w-64   /* ✅ FULL SCREEN ON MOBILE */
-          
+          w-[80%] sm:w-[60%] md:w-[320px] lg:w-64
           flex flex-col justify-between
           lg:static lg:translate-x-0 lg:min-h-screen
         `}
       >
-
-        {/* SCROLLABLE CONTENT */}
-        <div className="p-6 overflow-y-auto flex-1">
-
-          <h2 className="text-2xl font-display text-spice-brown mb-10">
-            VOV Admin
+        {/* HEADER */}
+        <div className="flex items-center justify-between p-5 border-b">
+          <h2 className="text-xl font-bold text-green-700">
+            Admin Panel
           </h2>
 
-          <nav className="space-y-3">
+          {/* CLOSE BUTTON (MOBILE) */}
+          <button
+            onClick={() => setOpen(false)}
+            className="lg:hidden"
+          >
+            <X size={20} />
+          </button>
+        </div>
 
-            <Link
-              to="/admin-dashboard"
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${activeLink("/admin-dashboard")}`}
-            >
-              <LayoutDashboard size={18} />
-              Dashboard
-            </Link>
+        {/* NAV LINKS */}
+        <div className="p-4 space-y-2 flex-1 overflow-y-auto">
 
-            <Link
-              to="/admin-orders"
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${activeLink("/admin-orders")}`}
-            >
-              <ShoppingCart size={18} />
-              Orders
-            </Link>
+          <Link
+            to="/admin-dashboard"
+            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${activeLink("/admin-dashboard")}`}
+          >
+            <LayoutDashboard size={18} />
+            Dashboard
+          </Link>
 
-            <Link
-              to="/admin-payments"
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${activeLink("/admin-payments")}`}
-            >
-              <CreditCard size={18} />
-              Payments
-            </Link>
+          <Link
+            to="/admin-orders"
+            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${activeLink("/admin-orders")}`}
+          >
+            <ShoppingCart size={18} />
+            Orders
+          </Link>
 
-            <Link
-              to="/admin-products"
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${activeLink("/admin-products")}`}
-            >
-              <Package size={18} />
-              Products
-            </Link>
+          <Link
+            to="/admin-payments"
+            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${activeLink("/admin-payments")}`}
+          >
+            <CreditCard size={18} />
+            Payments
+          </Link>
 
-          </nav>
+          <Link
+            to="/admin-products"
+            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${activeLink("/admin-products")}`}
+          >
+            <Package size={18} />
+            Products
+          </Link>
 
         </div>
 
         {/* LOGOUT */}
-        <div className="p-6 border-t">
+        <div className="p-4 border-t">
           <button
             onClick={handleLogout}
-            className="w-full py-3 rounded-lg bg-destructive text-white hover:opacity-90 transition flex items-center justify-center gap-2"
+            className="w-full py-3 rounded-lg bg-red-500 text-white hover:bg-red-600 transition flex items-center justify-center gap-2"
           >
             <LogOut size={18} />
             Logout
@@ -111,16 +125,8 @@ const AdminSidebar = () => {
 
       </aside>
 
-      {/* OVERLAY */}
-      {open && (
-        <div
-          onClick={() => setOpen(false)}
-          className="fixed inset-0 bg-black/40 lg:hidden z-30"
-        />
-      )}
-
-      {/* MOBILE BOTTOM NAV (UNCHANGED) */}
-      <div className="lg:hidden fixed bottom-0 left-0 w-full bg-card border-t shadow-lg rounded-t-2xl z-40 flex justify-around py-2">
+      {/* MOBILE BOTTOM NAV */}
+      <div className="lg:hidden fixed bottom-0 left-0 w-full bg-card border-t shadow-lg z-40 flex justify-around py-2">
 
         <Link to="/admin-dashboard" className="flex flex-col items-center text-xs">
           <LayoutDashboard size={20} />

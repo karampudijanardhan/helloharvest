@@ -1,14 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Truck, Shield, Heart } from "lucide-react";
+import { ArrowRight, Sparkles, Truck, Shield, Heart, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { mockProducts } from "@/data/mockProducts";
 import { categories } from "@/data/categories";
 
 const Home = () => {
-  const featuredProducts = mockProducts.filter((p) => p.badges.includes("Bestseller")).slice(0, 4);
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const featuredProducts = mockProducts
+    .filter((p) => p.badges.includes("Bestseller"))
+    .slice(0, 4);
+
   const newArrivals = mockProducts.slice(0, 8);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+  };
 
   return (
     <div className="min-h-screen">
@@ -18,7 +32,7 @@ const Home = () => {
           <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-primary blur-3xl" />
           <div className="absolute bottom-20 right-10 w-60 h-60 rounded-full bg-secondary blur-3xl" />
         </div>
-        
+
         <div className="container relative py-16 lg:py-24">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -28,42 +42,55 @@ const Home = () => {
               className="space-y-6"
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-600/10 text-green-400 text-sm font-medium backdrop-blur-sm">
-  <Sparkles className="w-4 h-4" />
-  100% Natural • No Preservatives
-</div>
-              
+                <Sparkles className="w-4 h-4" />
+                100% Natural • No Preservatives
+              </div>
+
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                Pure{" "}
-                <span>Natural</span> Powders,{" "}
-                <span>Crafted</span> for Wellness
+                Pure <span>Natural</span> Powders, <span>Crafted</span> for Wellness
               </h1>
-              
+
               <p className="text-lg text-muted-foreground max-w-xl">
-                Healthy powders made from organically sourced greens, roots, fruits and millets — 
+                Healthy powders made from organically sourced greens, roots, fruits and millets —
                 clean nutrition for every home, with zero preservatives and zero compromise.
               </p>
 
-              <div className="flex flex-wrap gap-4">
-  <Link to="/products">
-    <Button
-      size="lg"
-      className="bg-green-700 hover:bg-green-500 text-white gap-2 transition-all duration-300"
-    >
-      Explore Products
-      <ArrowRight className="w-5 h-5" />
-    </Button>
-  </Link>
+              {/* ✅ MOBILE SEARCH (only on small screens) */}
+              <form onSubmit={handleSearch} className="mt-2 w-full max-w-md md:hidden">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                  <Input
+                    type="search"
+                    placeholder="Search healthy powders..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10 h-10 rounded-full w-full"
+                  />
+                </div>
+              </form>
 
-  <Link to="/offers">
-    <Button
-      size="lg"
-      variant="outline"
-      className="gap-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white transition-all duration-300"
-    >
-      View Offers
-    </Button>
-  </Link>
-</div>
+              <div className="flex flex-wrap gap-4">
+                <Link to="/products">
+                  <Button
+                    size="lg"
+                    className="bg-green-700 hover:bg-green-500 text-white gap-2 transition-all duration-300"
+                  >
+                    Shop Now
+                    <ArrowRight className="w-5 h-5" />
+                  </Button>
+                </Link>
+
+                <Link to="/offers">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="gap-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white transition-all duration-300"
+                  >
+                    Today's Offers
+                  </Button>
+                </Link>
+              </div>
+
               {/* Trust badges */}
               <div className="flex flex-wrap gap-6 pt-6">
                 {[
@@ -92,7 +119,7 @@ const Home = () => {
                   alt="Natural healthy powders"
                   className="relative w-full h-full object-cover rounded-3xl shadow-2xl"
                 />
-                
+
                 {/* Floating badges */}
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
@@ -102,7 +129,7 @@ const Home = () => {
                   <p className="font-display font-bold text-lg">50+</p>
                   <p className="text-xs text-muted-foreground">Products</p>
                 </motion.div>
-                
+
                 <motion.div
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, delay: 1 }}
@@ -175,7 +202,7 @@ const Home = () => {
               </Button>
             </Link>
           </div>
-          
+
           <ProductGrid products={featuredProducts} />
         </div>
       </section>
@@ -229,6 +256,37 @@ const Home = () => {
         </div>
       </section>
 
+      {/* CUSTOM & BULK SECTION */}
+      <section className="py-12 gradient-warm">
+        <div className="container">
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-card rounded-xl shadow-card p-6 flex items-start gap-4 hover:shadow-hover transition-all">
+              <div className="text-3xl">🎨</div>
+              <div>
+                <h3 className="font-display text-xl font-semibold text-foreground">
+                  Customized Orders Available
+                </h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  We offer customized powders based on your requirements — including special blends, packaging, and quantity options.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-card rounded-xl shadow-card p-6 flex items-start gap-4 hover:shadow-hover transition-all">
+              <div className="text-3xl">📦</div>
+              <div>
+                <h3 className="font-display text-xl font-semibold text-foreground">
+                  Bulk Orders Accepted
+                </h3>
+                <p className="text-sm text-muted-foreground mt-1">
+                  We supply bulk quantities for shops, businesses, and resellers at competitive pricing with consistent quality.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* New Arrivals */}
       <section className="py-16 gradient-warm">
         <div className="container">
@@ -238,19 +296,18 @@ const Home = () => {
             description="Discover our latest healthy powder additions"
           />
           <div className="text-center mt-8">
-  <Link to="/products">
-    <Button
-      size="lg"
-      className="bg-green-700 hover:bg-green-500 text-white gap-2 transition-all duration-300"
-    >
-      View All Products
-      <ArrowRight className="w-5 h-5" />
-    </Button>
-  </Link>
-</div>
+            <Link to="/products">
+              <Button
+                size="lg"
+                className="bg-green-700 hover:bg-green-500 text-white gap-2 transition-all duration-300"
+              >
+                View All Products
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
-
     </div>
   );
 };

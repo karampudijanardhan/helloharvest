@@ -4,7 +4,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { QRCodeCanvas } from "qrcode.react"; // NEW
-
+import { sendAdminOrderEmail } from "@/utils/email";
 const Payment = () => {
 
   const navigate = useNavigate();
@@ -22,10 +22,10 @@ const Payment = () => {
 
   // NEW (Dynamic UPI Link for QR)
   const upiLink =
-    `upi://pay?pa=7731983479@ybl&pn=Karampudi%20baskar&am=${total}&cu=INR&tn=VOVFoodsOrder`;
+    `upi://pay?pa=7893064679@axl&pn=N%20Sand&eep=${total}&cu=INR&tn=HelloHarvest%20Order%20${orderId}`;
 
   const copyUPI = () => {
-    navigator.clipboard.writeText("7731983479@ybl");
+    navigator.clipboard.writeText("7893064679@axl");
     alert("UPI ID copied");
   };
 
@@ -83,17 +83,30 @@ const Payment = () => {
 
       if (res.data.success) {
 
-        navigate("/order-success", {
-          state: {
-            orderId,
-            total,
-            items,
-            createdAt: new Date().toISOString()
-          }
-        });
+  // ✅ SEND EMAIL TO ADMIN
+  await sendAdminOrderEmail({
+    order_id: orderId,
+    name: formData.name,
+    phone: formData.phone,
+    address: `${formData.address}, ${formData.city} - ${formData.pincode}`,
+    total: total,
+    payment: paymentMethod,
+    items: items.map((item:any) =>
+      `${item.product.name} (${item.selectedWeight}) x ${item.quantity}`
+    ).join(", ")
+  });
 
-      }
+  // ✅ NAVIGATE AFTER EMAIL
+  navigate("/order-success", {
+    state: {
+      orderId,
+      total,
+      items,
+      createdAt: new Date().toISOString()
+    }
+  });
 
+}
     } catch (error) {
 
       console.error("Order error:", error);
@@ -223,7 +236,7 @@ const Payment = () => {
                     <div className="flex items-center justify-between bg-gray-50 p-3 rounded">
 
                       <span className="text-sm">
-                        9121971848@ybl
+                        7893064679@axl
                       </span>
 
                       <button

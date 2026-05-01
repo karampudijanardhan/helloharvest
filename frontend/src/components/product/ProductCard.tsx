@@ -21,6 +21,11 @@ export const ProductCard = ({ product, reduceStock }: ProductCardProps) => {
   const { toast } = useToast();
 
   const currentPrice = product.prices[selectedWeight];
+
+  // ✅ FIXED 10% DISCOUNT
+  const discount = 10;
+  const originalPrice = Math.round(currentPrice / (1 - discount / 100));
+
   const isOutOfStock = product.stock <= 0;
 
   const handleAddToCart = () => {
@@ -110,7 +115,6 @@ export const ProductCard = ({ product, reduceStock }: ProductCardProps) => {
 
         {/* Category & Rating */}
         <div className="flex items-center justify-between">
-
           <span className="text-xs font-medium text-green-600 uppercase tracking-wide">
             {product.category}
           </span>
@@ -121,7 +125,6 @@ export const ProductCard = ({ product, reduceStock }: ProductCardProps) => {
               {product.rating}
             </span>
           </div>
-
         </div>
 
         {/* Title */}
@@ -162,23 +165,37 @@ export const ProductCard = ({ product, reduceStock }: ProductCardProps) => {
           Stock: {product.stock}
         </p>
 
-        {/* Price + Button */}
+        {/* ✅ PRICE SECTION */}
         <div className="flex items-center justify-between pt-2 border-t border-border">
 
-          <div>
-            <span className="text-2xl font-bold text-foreground">
-              ₹{currentPrice}
-            </span>
-            <span className="text-sm text-muted-foreground ml-1">
+          <div className="flex flex-col">
+
+            <div className="flex items-center gap-2">
+              <span className="text-xl font-bold text-foreground">
+                ₹{currentPrice}
+              </span>
+
+              <span className="text-sm text-gray-400 line-through">
+                ₹{originalPrice}
+              </span>
+
+              <span className="text-sm font-semibold text-green-600">
+                {discount}% OFF
+              </span>
+            </div>
+
+            <span className="text-xs text-muted-foreground mt-1">
               / {selectedWeight}
             </span>
+
           </div>
 
+          {/* Add Button */}
           <Button
             size="sm"
             onClick={handleAddToCart}
             disabled={isOutOfStock}
-            className="gap-2 bg-green-700 hover:bg-green-500 text-white transition-all duration-300"
+            className="gap-2 bg-green-700 hover:bg-green-500 text-white"
           >
             <ShoppingCart className="w-4 h-4" />
             {isOutOfStock ? "Out of Stock" : "Add"}

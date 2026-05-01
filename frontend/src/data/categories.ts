@@ -52,13 +52,13 @@ export const categories: Category[] = [
   },
   {
     id: "cat5",
-    name: "Natural Honey",
+    name: "Forest Honey",
     slug: "others",
     description:
       "Pure, raw honey sourced from trusted farms — rich in antioxidants and perfect for boosting immunity naturally.",
     image:
-      "/image (1).png",
-    productCount: 2,
+      "/ChatGPT Image Apr 28, 2026, 09_12_52 AM.png",
+    productCount: 1,
   },
   {
     id: "cat6",
@@ -67,7 +67,7 @@ export const categories: Category[] = [
     description:
       "Authentic homemade pickles with rich flavors — crafted using traditional recipes for a true taste experience.",
     image:
-      "/image (1).png",
-    productCount: 9,
+      "/image (3).png",
+    productCount: 3,
   },
 ];
