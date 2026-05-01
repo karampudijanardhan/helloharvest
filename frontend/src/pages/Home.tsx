@@ -26,6 +26,20 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
+      
+              {/* ✅ MOBILE SEARCH (only on small screens) */}
+              <form onSubmit={handleSearch} className="mt-5 w-full max-w-md md:hidden">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                  <Input
+                    type="search"
+                    placeholder="Search healthy powders..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10 h-10 rounded-full w-full"
+                  />
+                </div>
+              </form>
       {/* Hero Section */}
       <section className="relative overflow-hidden gradient-warm">
         <div className="absolute inset-0 opacity-10">
