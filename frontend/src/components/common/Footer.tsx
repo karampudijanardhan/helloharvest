@@ -137,7 +137,7 @@ export const Footer = () => {
       <div className="border-t border-white/10">
         <div className="container py-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-white/70">
 
-          <p>© 2025 HelloHarvest Pure Powders. All rights reserved.</p>
+          <p>© 2025 HelloHarvest Foods. All rights reserved.</p>
 
           <div className="flex flex-wrap gap-4">
             <Link to="/privacy-policy" className="hover:text-white">
