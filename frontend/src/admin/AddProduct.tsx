@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import api from "../utils/api";
 import AdminLayout from "./AdminLayout";
 
 const AddProduct = () => {
@@ -46,8 +47,8 @@ const AddProduct = () => {
 
     try {
 
-      const res = await axios.post(
-        "https://helloharvest.onrender.com/api/products/add",
+      const res = await api.post(
+        "/api/products/add",
         newProduct
       );
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../utils/api";
 import AdminLayout from "./AdminLayout";
 
 const Products = () => {
@@ -14,8 +15,8 @@ const Products = () => {
 
     try {
 
-      const res = await axios.get(
-        "https://helloharvest.onrender.com/api/products"
+      const res = await api.get(
+        "/api/products"
       );
 
       setProducts(res.data);
@@ -32,8 +33,8 @@ const Products = () => {
 
     try {
 
-      await axios.delete(
-        `https://helloharvest.onrender.com/api/products/${id}`
+      await api.delete(
+        `/api/products/${id}`
       );
 
       setProducts(products.filter(p => p._id !== id));

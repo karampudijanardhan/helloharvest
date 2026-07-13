@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../utils/api";
 import AdminLayout from "./AdminLayout";
-
-const API = "https://helloharvest.onrender.com/api";
-
 const Orders = () => {
 
   const [orders, setOrders] = useState<any[]>([]);
@@ -14,7 +12,7 @@ const Orders = () => {
     const fetchOrders = async () => {
       try {
         // ✅ CORRECT API
-        const res = await axios.get(`${API}/order`);
+        const res = await api.get(`/api/order`);
 
         console.log("Orders API:", res.data);
 
@@ -39,7 +37,7 @@ const Orders = () => {
 
     try {
       // ✅ CORRECT API
-      await axios.put(`${API}/order/status/${id}`, { status });
+      await api.put(`/api/order/status/${id}`, { status });
 
       // ✅ Update UI instantly
       setOrders(prev =>

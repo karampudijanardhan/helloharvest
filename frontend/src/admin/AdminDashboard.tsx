@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import api from "../utils/api";
 import AdminLayout from "./AdminLayout";
-
-const API = "https://helloharvest.onrender.com/api";
 
 const AdminDashboard = () => {
 
@@ -16,7 +15,7 @@ const AdminDashboard = () => {
 
       // Orders
       try{
-        const orderRes = await axios.get(`${API}/order`);
+        const orderRes = await api.get(`/api/order`);
         setOrders(orderRes.data?.length || 0);
       }catch(err){
         console.log("Orders API error",err);
@@ -24,7 +23,7 @@ const AdminDashboard = () => {
 
       // Products
       try{
-        const productRes = await axios.get(`${API}/products`);
+        const productRes = await api.get(`/api/products`);
         setProducts(productRes.data?.length || 0);
       }catch(err){
         console.log("Products API error",err);
@@ -32,7 +31,7 @@ const AdminDashboard = () => {
 
       // Visitors
       try{
-        const visitorRes = await axios.get(`${API}/visitor/count`);
+        const visitorRes = await api.get(`/api/visitor/count`);
         setVisitors(visitorRes.data?.visitors || 0);
       }catch(err){
         console.log("Visitors API error",err);
