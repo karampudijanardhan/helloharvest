@@ -4,7 +4,7 @@ export default function ShippingPolicy() {
       <h1 className="text-3xl font-bold mb-6">Shipping Policy</h1>
 
       <p className="mb-4">
-        At HelloHarvest Pure Powders, we ensure that your orders are processed 
+        At HelloHarvest Foods, we ensure that your orders are processed 
         and delivered with care and efficiency.
       </p>
 

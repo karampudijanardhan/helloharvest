@@ -4,7 +4,7 @@ export default function PrivacyPolicy() {
       <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
 
       <p className="mb-4">
-        At HelloHarvest Pure Powders, we value your privacy and are committed 
+        At HelloHarvest Foods, we value your privacy and are committed 
         to protecting your personal information. We collect basic customer 
         details such as name, phone number, email, and delivery address only 
         for order processing, communication, and delivery purposes.

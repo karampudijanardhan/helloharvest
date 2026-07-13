@@ -5,10 +5,10 @@ const About = () => (
     <section className="gradient-warm py-16">
       <div className="container max-w-3xl text-center">
         <h1 className="font-display text-4xl font-bold mb-6">
-          About HelloHarvest Pure Powders
+          About HelloHarvest Foods
         </h1>
         <p className="text-lg text-muted-foreground leading-relaxed">
-          HelloHarvest Pure Powders is dedicated to delivering high-quality, natural, 
+          HelloHarvest Foods is dedicated to delivering high-quality, natural, 
           and hygienically processed dehydrated food products. Inspired by the richness 
           of farm-fresh produce, we transform vegetables and fruits into pure, 
           nutrient-rich powders for modern, healthy living.
@@ -20,7 +20,7 @@ const About = () => (
     <section className="container py-12 max-w-3xl space-y-6 text-muted-foreground">
       
       <p>
-        Based in Andhra Pradesh, HelloHarvest Pure Powders focuses on producing 
+        Based in Andhra Pradesh, HelloHarvest Foods focuses on producing 
         premium dehydrated vegetable powders such as tomato, beetroot, spinach, 
         and seasonal fruits like mango. Our products are carefully processed to 
         retain natural taste, color, and nutritional value without adding 

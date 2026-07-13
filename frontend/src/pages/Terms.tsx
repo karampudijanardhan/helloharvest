@@ -4,7 +4,7 @@ export default function Terms() {
       <h1 className="text-3xl font-bold mb-6">Terms & Conditions</h1>
 
       <p className="mb-4">
-        By accessing and using the HelloHarvest Pure Powders website, you agree 
+        By accessing and using the HelloHarvest Foods website, you agree 
         to comply with and be bound by the following terms and conditions.
       </p>
 

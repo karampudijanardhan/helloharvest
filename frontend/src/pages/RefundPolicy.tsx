@@ -4,7 +4,7 @@ export default function RefundPolicy() {
       <h1 className="text-3xl font-bold mb-6">Refund & Return Policy</h1>
 
       <p className="mb-4">
-        At HelloHarvest Pure Powders, we take great care in ensuring that all 
+        At HelloHarvest Foods, we take great care in ensuring that all 
         our products are hygienically processed, packed, and delivered in 
         perfect condition.
       </p>
