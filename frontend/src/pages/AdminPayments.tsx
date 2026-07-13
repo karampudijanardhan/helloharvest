@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../utils/api";
 import AdminSidebar from "@/components/AdminSidebar";
 
 const AdminPayments = () => {
@@ -10,8 +10,8 @@ const AdminPayments = () => {
 
     try{
 
-      const res = await axios.get(
-        "https://helloharvest.onrender.com/api/order"
+      const res = await api.get(
+        "/api/order"
       );
 
       setOrders(res.data);
@@ -34,8 +34,8 @@ const AdminPayments = () => {
 
     try {
 
-     await axios.put(
-  `https://helloharvest.onrender.com/api/order/verify/${id}`
+     await api.put(
+  `/api/order/verify/${id}`
 );
       // refresh orders
       fetchOrders();

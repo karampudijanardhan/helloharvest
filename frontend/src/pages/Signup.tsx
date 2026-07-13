@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import api from "../utils/api";
 
 interface SignupForm {
   username: string;
@@ -38,8 +39,8 @@ const Signup: React.FC = () => {
     setLoading(true);
 
     try {
-      await axios.post(
-        "https://helloharvest.onrender.com/api/auth/signup",
+      await api.post(
+        "/api/auth/signup",
         {
           username: form.username,
           password: form.password

@@ -15,7 +15,7 @@ export const Footer = () => {
               {/* Logo */}
               <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-green-600 hover:border-green-400 shadow-md hover:shadow-[0_0_10px_rgba(34,197,94,0.4)] hover:scale-105 transition-all duration-300">
   <img
-    src="/white logo.png"
+    src="/newlogo.png"
     alt="HelloHarvest Pure Powders Logo"
     className="w-full h-full object-cover"
   />

@@ -1,6 +1,7 @@
 import React, { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import api from "../utils/api";
 
 const ForgotPassword: React.FC = () => {
 
@@ -19,8 +20,8 @@ const ForgotPassword: React.FC = () => {
     }
 
     try {
-      await axios.post(
-        "https://helloharvest.onrender.com/api/auth/reset-password",
+      await api.post(
+        "/api/auth/reset-password",
         {
           username,
           newPassword

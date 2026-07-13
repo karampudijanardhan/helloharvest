@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../utils/api";
 import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
@@ -12,8 +12,8 @@ const AdminLogin = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "https://helloharvest.onrender.com/api/auth/admin-login",
+      const res = await api.post(
+        "/api/auth/admin-login",
         { email: email.trim().toLowerCase() }
       );
 

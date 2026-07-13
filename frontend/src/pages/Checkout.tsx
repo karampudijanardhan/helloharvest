@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useCart } from "@/context/CartContext";
-import axios from "axios"; // ✅ NEW
+import axios from "axios";
+import api from "../utils/api";// ✅ NEW
 
 const Checkout = () => {
 
@@ -78,7 +79,7 @@ const Checkout = () => {
 
     // ✅ NEW: BACKEND SAVE (ONLY ADDITION)
     try {
-      await axios.post("https://helloharvest.onrender.com/api/order", {
+      await api.post("/api/order", {
         username,
         name: formData.name,
         phone: formData.phone,

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { PackageSearch } from "lucide-react";
+import api from "../utils/api";
 
 interface OrderItem {
   name: string;
@@ -32,8 +33,8 @@ const MyOrders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await axios.get(
-          `https://helloharvest.onrender.com/api/order/my/${username}`
+        const res = await api.get(
+          `/api/order/my/${username}`
         );
 
         if (Array.isArray(res.data)) {

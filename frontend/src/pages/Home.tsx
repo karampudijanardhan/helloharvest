@@ -69,20 +69,6 @@ const Home = () => {
                 clean nutrition for every home, with zero preservatives and zero compromise.
               </p>
 
-              {/* ✅ MOBILE SEARCH (only on small screens) */}
-              <form onSubmit={handleSearch} className="mt-2 w-full max-w-md md:hidden">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                  <Input
-                    type="search"
-                    placeholder="Search healthy powders..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 h-10 rounded-full w-full"
-                  />
-                </div>
-              </form>
-
               <div className="flex flex-wrap gap-4">
                 <Link to="/products">
                   <Button

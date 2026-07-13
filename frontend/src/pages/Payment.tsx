@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import api from "../utils/api";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { QRCodeCanvas } from "qrcode.react"; // NEW
@@ -76,8 +77,8 @@ const Payment = () => {
 
       setLoading(true);
 
-      const res = await axios.post(
-  "https://helloharvest.onrender.com/api/order",
+      const res = await api.post(
+  "/api/order",
   orderData
 );
 

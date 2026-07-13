@@ -151,7 +151,7 @@ export const Navbar = () => {
   {/* Circle Logo */}
   <div className="w-15 h-14 rounded-full overflow-hidden border-2 border-green-600 shadow-md hover:scale-105 transition-all duration-300">
   <img
-    src="/Logo.png"
+    src="/newlogo.png"
     alt="HelloHarvest Foods Logo"
     className="w-full h-full object-cover"
   />

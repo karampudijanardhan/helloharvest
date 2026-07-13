@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import api from "../utils/api";
 import { motion } from "framer-motion";
 import { Package, ChefHat, Truck, CheckCircle } from "lucide-react";
 
@@ -29,8 +30,8 @@ const TrackOrder = () => {
           return;
         }
 
-        const res = await axios.get(
-          `https://helloharvest.onrender.com/api/order/track/${orderId}`
+        const res = await api.get(
+          `/api/order/track/${orderId}`
         );
 
         setStatus(res.data.status);
