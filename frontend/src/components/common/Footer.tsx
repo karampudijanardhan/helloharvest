@@ -23,7 +23,7 @@ export const Footer = () => {
 
               <div>
                 <h3 className="font-display font-bold text-xl">
-                  HelloHarvest Pure Powders
+                  HelloHarvest Foods
                 </h3>
                 <p className="text-xs text-white/70">
                   Pure • Natural • Healthy

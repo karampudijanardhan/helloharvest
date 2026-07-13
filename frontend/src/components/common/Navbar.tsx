@@ -163,7 +163,7 @@ export const Navbar = () => {
       HelloHarvest
     </h1>
     <span className="text-xs text-muted-foreground tracking-wide">
-      Pure Powders
+      Foods
     </span>
   </div>
 </div>
