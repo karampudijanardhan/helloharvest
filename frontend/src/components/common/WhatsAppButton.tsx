@@ -1,8 +1,33 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { openWhatsAppChat } from "@/utils/whatsapp";
 
 export const WhatsAppButton = () => {
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (!window.visualViewport) return;
+
+      const isOpen =
+        window.innerHeight - window.visualViewport.height > 150;
+
+      setKeyboardOpen(isOpen);
+    };
+
+    handleResize();
+
+    window.visualViewport?.addEventListener("resize", handleResize);
+
+    return () => {
+      window.visualViewport?.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Hide WhatsApp button when keyboard is open
+  if (keyboardOpen) return null;
+
   return (
     <motion.button
       onClick={() => openWhatsAppChat()}
@@ -10,10 +35,11 @@ export const WhatsAppButton = () => {
       animate={{ scale: 1 }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="fixed bottom-12 right-6 mb-8 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center "
+      className="fixed bottom-12 right-6 mb-8 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center"
       aria-label="Chat on WhatsApp"
     >
       <MessageCircle className="w-7 h-7 fill-current" />
+
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
