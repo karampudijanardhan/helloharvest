@@ -2,6 +2,8 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import api from "../utils/api";
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 interface SignupForm {
   username: string;
@@ -32,7 +34,10 @@ const Signup: React.FC = () => {
     e.preventDefault();
 
     if (form.password !== form.confirmPassword) {
-      alert("Passwords do not match ❌");
+      toast.error("Password Mismatch", {
+  description: "Password and Confirm Password must be the same.",
+  duration: 3000,
+});
       return;
     }
 
@@ -52,12 +57,22 @@ const Signup: React.FC = () => {
         }
       );
 
-      alert("Signup successful ✅. Please login.");
-      navigate("/login");
+     toast.success("Account Created 🎉", {
+  description: "Your account has been created successfully.",
+  duration: 2500,
+});
+
+setTimeout(() => {
+  navigate("/login");
+}, 1000);
 
     } catch (err: any) {
       console.error("Signup error:", err);
-      alert(err.response?.data?.message || "Signup failed ❌");
+      toast.error("Signup Failed", {
+  description:
+    err.response?.data?.message || "Unable to create your account.",
+  duration: 3000,
+});
     } finally {
       setLoading(false);
     }
@@ -128,12 +143,19 @@ const Signup: React.FC = () => {
 
           {/* Button */}
           <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-2 rounded-lg bg-green-700 hover:bg-green-500 text-white font-medium transition-all duration-300 disabled:opacity-60"
-          >
-            {loading ? "Creating..." : "Create Account"}
-          </button>
+  type="submit"
+  disabled={loading}
+  className="w-full py-2 rounded-lg bg-green-700 hover:bg-green-500 text-white font-medium transition-all duration-300 disabled:opacity-60 flex items-center justify-center gap-2"
+>
+  {loading ? (
+    <>
+      <Loader2 className="w-5 h-5 animate-spin" />
+      Creating Account...
+    </>
+  ) : (
+    "Create Account"
+  )}
+</button>
 
         </form>
 

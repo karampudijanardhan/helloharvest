@@ -2,6 +2,8 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import api from "../utils/api";
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 interface LoginForm {
   username: string;
@@ -41,11 +43,21 @@ const Login: React.FC = () => {
 
       window.dispatchEvent(new Event("login-success"));
 
-      alert("Login successful ✅");
-      navigate("/");
+      toast.success("Login Successful 🎉", {
+  description: `Welcome back, ${res.data.user.username}!`,
+  duration: 2500,
+});
+
+setTimeout(() => {
+  navigate("/");
+}, 1500);
     } catch (err: any) {
       console.error("Login error:", err);
-      alert(err.response?.data?.message || "Login failed ❌");
+      toast.error("Login Failed", {
+  description:
+    err.response?.data?.message || "Invalid username or password",
+  duration: 3000,
+});
     } finally {
       setLoading(false);
     }
@@ -106,13 +118,20 @@ const Login: React.FC = () => {
           </div>
 
           {/* Login Button */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-2 rounded-lg bg-green-700 hover:bg-green-500 text-white font-medium transition-all duration-300 disabled:opacity-60"
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
+         <button
+  type="submit"
+  disabled={loading}
+  className="w-full py-2 rounded-lg bg-green-700 hover:bg-green-500 text-white font-medium transition-all duration-300 disabled:opacity-60 flex items-center justify-center gap-2"
+>
+  {loading ? (
+    <>
+      <Loader2 className="w-5 h-5 animate-spin" />
+      Logging in...
+    </>
+  ) : (
+    "Login"
+  )}
+</button>
 
         </form>
 
