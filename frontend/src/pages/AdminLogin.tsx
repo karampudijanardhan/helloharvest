@@ -1,72 +1,108 @@
 import React, { useState } from "react";
-import api from "../utils/api";
 import { useNavigate } from "react-router-dom";
+import { Loader2, ShieldCheck } from "lucide-react";
+import { toast } from "sonner";
+import api from "../utils/api";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setLoading(true);
+
     try {
-      const res = await api.post(
-        "/api/auth/admin-login",
-        { email: email.trim().toLowerCase() }
-      );
+      const res = await api.post("/api/auth/admin-login", {
+        email: email.trim().toLowerCase(),
+      });
 
       localStorage.setItem("adminToken", res.data.token);
 
-      alert("Admin Login Success");
+      toast.success("Admin Login Successful 🎉", {
+        description: "Welcome to HelloHarvest Admin Dashboard",
+        duration: 2500,
+      });
 
-      navigate("/admin-dashboard");
+      setTimeout(() => {
+        navigate("/admin-dashboard");
+      }, 800);
     } catch (err: any) {
       console.error(err);
-      alert("Invalid Admin");
+
+      toast.error("Login Failed", {
+        description:
+          err.response?.data?.message || "Invalid Admin Email",
+        duration: 3000,
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-warm px-4 overflow-x-hidden">
-      <div className="w-full max-w-md bg-card text-card-foreground rounded-xl shadow-card border-2 border-gray-300 hover:border-orange-400 transition p-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-white to-green-100 px-4">
 
-        <h2 className="text-2xl font-display text-center mb-6 text-spice-brown">
-          Admin Login
-        </h2>
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-green-200 p-8">
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        {/* Header */}
+        <div className="flex flex-col items-center mb-8">
 
-          <input
-            type="email"
-            placeholder="Admin Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full border border-input px-4 py-2 rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-            required
-          />
+          <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+            <ShieldCheck className="w-8 h-8 text-green-700" />
+          </div>
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full border border-input px-4 py-2 rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-            required
-          />
+          <h1 className="text-3xl font-bold text-green-700">
+            Admin Login
+          </h1>
 
-          {/* ✅ GREEN BUTTON */}
+          <p className="text-sm text-gray-500 mt-2 text-center">
+            Login to access HelloHarvest Admin Dashboard
+          </p>
+
+        </div>
+
+        <form onSubmit={handleLogin} className="space-y-6">
+
+          <div>
+
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Admin Email
+            </label>
+
+            <input
+              type="email"
+              placeholder="admin@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full rounded-xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+              required
+            />
+
+          </div>
+
           <button
             type="submit"
-            className="w-full py-2 rounded-lg bg-green-700 hover:bg-green-500 text-white font-medium transition-all duration-300"
+            disabled={loading}
+            className="w-full py-3 rounded-xl bg-green-700 hover:bg-green-600 text-white font-semibold transition-all duration-300 disabled:opacity-60 flex items-center justify-center gap-2"
           >
-            Login
+            {loading ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                Logging in...
+              </>
+            ) : (
+              "Admin Login"
+            )}
           </button>
 
         </form>
 
       </div>
+
     </div>
   );
 };
