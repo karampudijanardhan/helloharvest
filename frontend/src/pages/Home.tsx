@@ -10,36 +10,31 @@ import { categories } from "@/data/categories";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
-
   const featuredProducts = mockProducts
     .filter((p) => p.badges.includes("Bestseller"))
     .slice(0, 4);
 
   const newArrivals = mockProducts.slice(0, 8);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!searchQuery.trim()) return;
-    navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
-  };
-
   return (
     <div className="min-h-screen">
       
               {/* ✅ MOBILE SEARCH (only on small screens) */}
-              <form onSubmit={handleSearch} className="mt-5 w-full max-w-md md:hidden">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                  <Input
-                    type="search"
-                    placeholder="Search healthy powders..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 h-10 rounded-full w-full"
-                  />
-                </div>
-              </form>
+             <div
+  className="mt-5 w-full max-w-md md:hidden"
+  onClick={() => navigate("/search")}
+>
+  <div className="relative cursor-pointer">
+    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+
+    <Input
+      type="text"
+      placeholder="Search healthy powders..."
+      readOnly
+      className="pl-10 h-10 rounded-full w-full cursor-pointer bg-white"
+    />
+  </div>
+</div>
       {/* Hero Section */}
       <section className="relative overflow-hidden gradient-warm">
         <div className="absolute inset-0 opacity-10">

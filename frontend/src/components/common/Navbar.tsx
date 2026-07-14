@@ -320,7 +320,10 @@ onClick={() => setIsMenuOpen(false)}
 </AnimatePresence>
 
 {/* MOBILE BOTTOM BAR */}
-<div className="lg:hidden fixed bottom-0 w-full bg-white border-t flex justify-around py-3">
+{/* MOBILE BOTTOM BAR */}
+<div
+  className="lg:hidden fixed bottom-0 left-0 right-0 z-40 w-full bg-white border-t flex justify-around py-3"
+>
 
 <Link to="/" className="flex flex-col items-center">
 <Home size={22}/>
