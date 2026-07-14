@@ -41,6 +41,7 @@ export const Navbar = () => {
   const [openMobileMenu, setOpenMobileMenu] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
 
   const { getItemCount } = useCart();
   const itemCount = getItemCount();
@@ -92,6 +93,23 @@ export const Navbar = () => {
       window.removeEventListener("login-success", checkLogin);
     };
   }, []);
+
+  useEffect(() => {
+  const handleResize = () => {
+    if (!window.visualViewport) return;
+
+    const isOpen =
+      window.innerHeight - window.visualViewport.height > 150;
+
+    setKeyboardOpen(isOpen);
+  };
+
+  window.visualViewport?.addEventListener("resize", handleResize);
+
+  return () => {
+    window.visualViewport?.removeEventListener("resize", handleResize);
+  };
+}, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -321,9 +339,10 @@ onClick={() => setIsMenuOpen(false)}
 
 {/* MOBILE BOTTOM BAR */}
 {/* MOBILE BOTTOM BAR */}
-<div
-  className="lg:hidden fixed bottom-0 left-0 right-0 z-40 w-full bg-white border-t flex justify-around py-3"
->
+{!keyboardOpen && (
+  <div
+    className="lg:hidden fixed bottom-0 left-0 right-0 z-40 w-full bg-white border-t flex justify-around py-3"
+  >
 
 <Link to="/" className="flex flex-col items-center">
 <Home size={22}/>
@@ -359,7 +378,8 @@ onClick={() => setIsMenuOpen(false)}
 </Link>
 )}
 
-</div>
+        </div>
+        )}
 
 </header>
   );
