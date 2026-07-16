@@ -11,6 +11,11 @@ import authRoutes from "./routes/auth.js";
 import productRoutes from "./routes/productRoutes.js";
 import visitorRoutes from "./routes/visitor.js";
 import reviewRoutes from "./routes/reviews.js";
+import aiRoutes from "./routes/aiRoutes.js";
+import recipeRoutes from "./routes/recipeRoutes.js";
+import productFinderRoutes from "./routes/productFinderRoutes.js";
+import mealPlannerRoutes from "./routes/mealPlannerRoutes.js";
+import imageScannerRoutes from "./routes/imageScannerRoutes.js";
 
 dotenv.config();
 
@@ -40,6 +45,12 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/visitor", visitorRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/ai", aiRoutes);
+app.use("/api/recipe", recipeRoutes);
+app.use("/api/product-finder", productFinderRoutes);
+app.use("/api/meal-planner", mealPlannerRoutes);
+app.use("/api/image-scanner",imageScannerRoutes );
+console.log("ENV:", process.env.GEMINI_API_KEY);
 
 // ================= HEALTH =================
 app.get("/api/test", (req, res) => {

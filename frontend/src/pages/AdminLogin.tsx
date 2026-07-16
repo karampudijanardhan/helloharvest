@@ -27,7 +27,7 @@ const AdminLogin = () => {
         duration: 2500,
       });
 
-      setTimeout(() => {
+      setTimeout(() => { 
         navigate("/admin-dashboard");
       }, 800);
     } catch (err: any) {

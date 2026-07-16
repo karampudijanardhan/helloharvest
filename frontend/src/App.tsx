@@ -31,6 +31,10 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import MyOrders from "./pages/MyOrders";
+import AIHealthAdvisor from "./pages/AIHealthAdvisor";
+import AIRecipeGenerator from "./pages/AIRecipeGenerator";
+import AIProductFinder from "./pages/AIProductFinder";
+import AIMealPlanner from "./pages/AIMealPlanner";
 
 // ✅ FIXED IMPORTS
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -46,6 +50,7 @@ import AdminDashboard from "./admin/AdminDashboard";
 import Orders from "./admin/Orders";
 import ProductsAdmin from "./admin/Products";
 import AddProduct from "./admin/AddProduct";
+import AIImageScanner from "./pages/AIImageScanner";
 
 const queryClient = new QueryClient();
 
@@ -103,6 +108,11 @@ const AppLayout = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/ai-health-advisor" element={<AIHealthAdvisor />} />
+          <Route path="/ai-recipe-generator" element={<AIRecipeGenerator />} />
+          <Route path="/ai-product-finder" element={<AIProductFinder />} />
+          <Route path="/ai-meal-planner" element={<AIMealPlanner />} />
+          <Route path="/ai-image-scanner" element={<AIImageScanner />} />
 
           {/* Policy pages */}
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

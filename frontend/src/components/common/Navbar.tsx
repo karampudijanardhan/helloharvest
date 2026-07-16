@@ -29,10 +29,36 @@ const navLinks = [
   { name: "Spice Powders", path: "/category/spices" },
 
   { name: "Millets", path: "/category/millets" },
-  { name: "Honey", path: "/category/others" },   // ✅ FIXED
+  { name: "Honey", path: "/category/others" },
   { name: "Pickles", path: "/category/pickles" },
 
-  { name: "Offers", path: "/offers" }
+  { name: "Offers", path: "/offers" },
+
+  {
+    name: "🤖 AI Features",
+    submenu: [
+      {
+        name: "AI Health Advisor",
+        path: "/ai-health-advisor",
+      },
+      {
+        name: "AI Product Finder",
+        path: "/ai-product-finder",
+      },
+      {
+        name: "AI Recipe Generator",
+        path: "/ai-recipe-generator",
+      },
+      {
+        name: "AI Meal Planner",
+        path: "/ai-meal-planner",
+      },
+      {
+        name: "AI Food Scanner",
+        path: "/ai-image-scanner",
+      },
+    ],
+  },
 ];
 
 export const Navbar = () => {
@@ -288,53 +314,92 @@ link.submenu ? (
 
 {/* MOBILE MENU */}
 <AnimatePresence>
-{isMenuOpen && (
-<motion.div className="lg:hidden border-t bg-white">
-<div className="flex flex-col">
+  {isMenuOpen && (
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: "auto" }}
+      exit={{ opacity: 0, height: 0 }}
+      transition={{ duration: 0.3 }}
+      className="lg:hidden border-t bg-white shadow-lg"
+    >
+      <div className="flex flex-col">
 
-{navLinks.map((link) =>
-link.submenu ? (
-<div key={link.name}>
-<button
-className="px-4 py-3 text-left w-full"
-onClick={() =>
-setOpenMobileMenu(openMobileMenu === link.name ? null : link.name)
-}
->
-{link.name}
-</button>
+        {navLinks.map((link) =>
 
-{openMobileMenu === link.name && (
-<div className="pl-6">
-{link.submenu.map((sub) => (
-<Link
-key={sub.path}
-to={sub.path}
-className="block py-2"
-onClick={() => setIsMenuOpen(false)}
->
-{sub.name}
-</Link>
-))}
-</div>
-)}
+          link.submenu ? (
 
-</div>
-) : (
-<Link
-key={link.path}
-to={link.path}
-className="px-4 py-3"
-onClick={() => setIsMenuOpen(false)}
->
-{link.name}
-</Link>
-)
-)}
+            <div key={link.name} className="border-b">
 
-</div>
-</motion.div>
-)}
+              <button
+                className="w-full px-4 py-3 flex items-center justify-between font-medium text-left hover:bg-green-50"
+                onClick={() =>
+                  setOpenMobileMenu(
+                    openMobileMenu === link.name ? null : link.name
+                  )
+                }
+              >
+                <span>{link.name}</span>
+
+                <span className="text-lg">
+                  {openMobileMenu === link.name ? "▲" : "▼"}
+                </span>
+
+              </button>
+
+              <AnimatePresence>
+
+                {openMobileMenu === link.name && (
+
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="bg-gray-50"
+                  >
+
+                    {link.submenu.map((sub) => (
+
+                      <Link
+                        key={sub.path}
+                        to={sub.path}
+                        className="block px-8 py-3 hover:bg-green-100 hover:text-green-700"
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          setOpenMobileMenu(null);
+                        }}
+                      >
+                        {sub.name}
+                      </Link>
+
+                    ))}
+
+                  </motion.div>
+
+                )}
+
+              </AnimatePresence>
+
+            </div>
+
+          ) : (
+
+            <Link
+              key={link.path}
+              to={link.path}
+              className="px-4 py-3 border-b hover:bg-green-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {link.name}
+            </Link>
+
+          )
+
+        )}
+
+      </div>
+    </motion.div>
+  )}
 </AnimatePresence>
 
 {/* MOBILE BOTTOM BAR */}
