@@ -3,55 +3,63 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AIVoiceSearch from "./AIVoiceSearch";
 
-const API = "http://localhost:10000/api";
+const API = import.meta.env.VITE_API_URL + "/api";
 
 export default function AIProductFinder() {
+  const navigate = useNavigate();
+
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
-    const voiceSearch = (text) => {
-  setQuery(text);
+  const [error, setError] = useState("");
 
-  setTimeout(() => {
+  // Voice Search
+  const voiceSearch = (text) => {
+    setQuery(text);
     search(text);
-  }, 500);
-};
+  };
 
-  const search = async (voiceText = null) => {
+  // AI Search
+  const search = async (searchText = null) => {
+    const finalQuery = searchText || query;
 
-  const searchQuery = voiceText || query;
+    if (!finalQuery.trim()) {
+      alert("Please enter your health problem.");
+      return;
+    }
 
-  if (!searchQuery.trim()) {
-    alert("Please enter search");
-    return;
-  }
+    try {
+      setLoading(true);
+      setError("");
+      setProducts([]);
 
-  try {
+      console.log("Searching:", finalQuery);
 
-    setLoading(true);
+      const { data } = await axios.post(`${API}/product-finder`, {
+        query: finalQuery,
+      });
 
-    const { data } = await axios.post(
-      `${API}/product-finder`,
-      {
-        query: searchQuery,
+      console.log("AI Response:", data);
+
+      if (data.success === false) {
+        setError(data.message);
+      } else if (Array.isArray(data.products)) {
+        setProducts(data.products);
+      } else {
+        setError("No products found.");
       }
-    );
+    } catch (err) {
+      console.error(err);
 
-    setProducts(data.products);
-
-  } catch (err) {
-
-    console.log(err);
-
-  } finally {
-
-    setLoading(false);
-
-  }
-
-};
+      if (err.response) {
+        setError(err.response.data.message || "Server Error");
+      } else {
+        setError("Unable to connect to server.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="max-w-6xl mx-auto p-8">
@@ -70,15 +78,15 @@ export default function AIProductFinder() {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Example: I have diabetes and knee pain"
         className="border rounded-xl p-4 w-full mt-8"
-          />
-          <div className="mt-4 flex gap-4 items-center">
+      />
 
-  <AIVoiceSearch onSearch={voiceSearch} />
-
-</div>
+      <div className="mt-4">
+        <AIVoiceSearch onSearch={voiceSearch} />
+      </div>
 
       <button
-        onClick={search}
+        type="button"
+        onClick={() => search()}
         disabled={loading}
         className="mt-5 bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-xl"
       >
@@ -86,25 +94,28 @@ export default function AIProductFinder() {
       </button>
 
       {error && (
-        <div className="mt-6 bg-red-100 text-red-700 p-4 rounded-lg">
+        <div className="mt-6 p-4 bg-red-100 text-red-700 rounded-lg">
           {error}
         </div>
       )}
 
       {!loading && products.length === 0 && !error && (
-        <p className="mt-8 text-gray-500">
+        <p className="mt-8 text-center text-gray-500">
           Ask a question to get AI recommendations.
         </p>
       )}
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-        {products.map((item, index) => (
+
+        {products.map((item) => (
+
           <div
-            key={index}
-            className="border rounded-xl shadow-lg p-5"
+            key={item.id}
+            className="border rounded-xl shadow-lg p-5 hover:shadow-xl transition"
           >
+
             <img
-              src={item.image || "/placeholder.png"}
+              src={item.image}
               alt={item.name}
               className="h-52 w-full object-cover rounded-lg"
             />
@@ -130,13 +141,16 @@ export default function AIProductFinder() {
             </p>
 
             <button
-  onClick={() => navigate(`/product/${item.id}`)}
-  className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg"
->
-  View Product
-</button>
+              onClick={() => navigate(`/product/${item.id}`)}
+              className="w-full mt-5 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg"
+            >
+              View Product
+            </button>
+
           </div>
+
         ))}
+
       </div>
 
     </div>
