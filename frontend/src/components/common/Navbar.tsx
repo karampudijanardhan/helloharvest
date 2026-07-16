@@ -316,11 +316,11 @@ link.submenu ? (
 <AnimatePresence>
   {isMenuOpen && (
 <motion.div
-  initial={{ opacity: 0, y: -20 }}
-  animate={{ opacity: 1, y: 0 }}
-  exit={{ opacity: 0, y: -20 }}
-  transition={{ duration: 0.25 }}
-  className="lg:hidden bg-white shadow-xl border-t overflow-y-auto max-h-[80vh]"
+  initial={{ x: "-100%" }}
+  animate={{ x: 0 }}
+  exit={{ x: "-100%" }}
+  transition={{ duration: 0.3 }}
+  className="fixed top-0 left-0 w-full h-screen bg-white z-50 overflow-y-auto"
 >
       <div className="flex flex-col">
 
