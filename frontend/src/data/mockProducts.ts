@@ -613,7 +613,7 @@ export const mockProducts = [
   name: "Gongura Pickle",
   category: "pickles",
   type: "veg",
-  image: "/public/gonura.png",
+  image: "/gonura.png",
   weightOptions: ["250g", "500g"],
   prices: { "250g": 160, "500g": 300 },
   spiceLevel: "hot",
