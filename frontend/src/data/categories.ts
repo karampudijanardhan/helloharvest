@@ -48,7 +48,7 @@ export const categories: Category[] = [
       "Wholesome millet powders like ragi, jowar, and bajra — traditional grains packed with fiber and nutrition.",
     image:
       "/image.png",
-    productCount: 4,
+    productCount: 5,
   },
   {
     id: "cat5",

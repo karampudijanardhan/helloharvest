@@ -487,6 +487,56 @@ export const mockProducts = [
   ingredients: ["Foxtail Millet"],
   benefits: ["Controls sugar", "High protein", "Easy digestion"],
   },
+  {
+  id: "m5",
+  name: "Millet Health Mix",
+  category: "millets",
+  image: "/image.png",
+
+  weightOptions: ["250g", "500kg"],
+
+  prices: {
+    "250g": 219,
+    "500kg": 438,
+  },
+
+  spiceLevel: "mild",
+
+  shelfLife: "6 months",
+
+  stock: 80,
+
+  rating: 4.9,
+
+  badges: [
+    "Best Seller",
+    "100% Natural",
+    "Family Health"
+  ],
+
+  description:
+    "A premium Millet Health Mix made from Ragi, Sajjalu, Jonalu, and Mokka Jonna. It provides complete daily nutrition for children, adults, and senior citizens. Rich in calcium, fiber, and essential nutrients for a healthy lifestyle.",
+
+  ingredients: [
+    "Ragi",
+    "Sajjalu (Pearl Millet)",
+    "Jonalu (Sorghum)",
+    "Mokka Jonna (Maize)"
+  ],
+
+  benefits: [
+    "Rich in Calcium",
+    "Supports Heart Health",
+    "High Fiber",
+    "Improves Digestion",
+    "Aids Weight Management",
+    "Energy Booster",
+    "Rich in Nutrients",
+    "100% Natural",
+    "No Preservatives",
+    "Suitable for All Age Groups"
+  ],
+},
 //HONEY
 {
   id: "h1",
