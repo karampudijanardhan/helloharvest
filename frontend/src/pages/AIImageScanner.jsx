@@ -2,7 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const API = "http://localhost:10000/api";
+const API = import.meta.env.VITE_API_URL + "/api";
+
+
 
 export default function AIImageScanner() {
   const [image, setImage] = useState(null);
