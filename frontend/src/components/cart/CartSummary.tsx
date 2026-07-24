@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { openWhatsAppChat, createOrderMessage } from "@/utils/whatsapp";
 
-const DELIVERY_CHARGE = 50;
-const FREE_DELIVERY_MIN = 599;
+const DELIVERY_CHARGE = 80;
+const FREE_DELIVERY_MIN = 1999;
 
 export const CartSummary = () => {
   const { state } = useCart();

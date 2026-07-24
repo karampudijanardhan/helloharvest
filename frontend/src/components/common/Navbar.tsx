@@ -32,7 +32,7 @@ const navLinks = [
   { name: "Honey", path: "/category/others" },
   { name: "Pickles", path: "/category/pickles" },
 
-  { name: "Offers", path: "/offers" },
+  // { name: "Offers", path: "/offers" },
 
   {
     name: "🤖 AI Features",

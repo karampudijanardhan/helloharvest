@@ -31,8 +31,8 @@ const Checkout = () => {
   });
 
   // ✅ SAME LOGIC (UNCHANGED)
-  const FREE_DISTRICT = "nellore";
-  const OUTSIDE_CHARGE = 30;
+  const FREE_DISTRICT = "banagarapallem";
+  const OUTSIDE_CHARGE = 80;
   const userLocation = `${formData.city}`.toLowerCase();
 
   const isFreeDistrict = userLocation.includes(FREE_DISTRICT);
@@ -354,7 +354,7 @@ const Checkout = () => {
 
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Delivery</span>
-                    <span className="text-green-600">FREE</span>
+                    <span className="text-green-600">{ OUTSIDE_CHARGE}</span>
                   </div>
 
                   <div className="flex justify-between text-lg font-bold pt-2 border-t border-border">
