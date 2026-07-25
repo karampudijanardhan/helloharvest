@@ -1,8 +1,6 @@
 import path from "path";
 
 export const scanFood = async (req, res) => {
-  console.log("🔥 NEW IMAGE SCANNER CONTROLLER");
-  console.log(req.file);
   try {
     if (!req.file) {
       return res.status(400).json({
