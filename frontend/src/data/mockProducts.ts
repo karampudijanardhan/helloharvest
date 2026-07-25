@@ -593,7 +593,7 @@ export const mockProducts = [
     id: "p17",
     name: "Chicken Pickle",
     category: "pickles",
-    image: "/chicken.png",
+    image: "",
     weightOptions: ["250g", "500g", "1kg"],
     prices: { "250g": 250, "500g": 449, "1kg": 899 },
     spiceLevel: "hot",
